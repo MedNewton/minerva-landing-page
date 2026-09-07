@@ -79,7 +79,9 @@ export function Header() {
               <MoonIcon className="block dark:hidden" />
             </button>
             <a
-              href="#cta"
+              href="https://www.app.minerva-app.website"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex text-sm text-fg-muted hover:text-fg px-3 h-10 items-center rounded-[10px] transition-colors duration-150"
             >
               Sign in
