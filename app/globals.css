@@ -1,0 +1,1081 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Design tokens + component CSS.
+   Lifted from the original single-file landing (legacy/index.html) so the
+   Next.js port renders pixel-identical. Tailwind utilities come first (above),
+   so these rules win ties on specificity exactly like the CDN build did.
+   ========================================================================== */
+
+:root {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-alt: #F1F4F8;
+  --fg: #2A303B;
+  --fg-muted: #475569;
+  --fg-subtle: #64748B;
+  --primary: #0F172A;
+  --on-primary: #FFFFFF;
+  --primary-hover: #1E293B;
+  --accent: #0369A1;
+  --accent-strong: #075985;
+  --accent-tint: rgba(3, 105, 161, 0.1);
+  --accent-soft: rgba(3, 106, 162, 0.6);
+  --bg-glow: rgba(3, 105, 161, 0.20);
+  --mesh-1: rgba(3, 105, 161, 0.22);
+  --mesh-2: rgba(7, 89, 133, 0.16);
+  --mesh-3: rgba(37, 99, 235, 0.12);
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --muted: #E8ECF1;
+  --success: #15803D;
+}
+.dark {
+  --bg: #0E1117;
+  --surface: #161B22;
+  --surface-alt: #1A2230;
+  --fg: #E6EAF2;
+  --fg-muted: #A6B0C0;
+  --fg-subtle: #8B95A7;
+  --primary: #E6EAF2;
+  --on-primary: #0F172A;
+  --primary-hover: #F1F5F9;
+  --accent: #38BDF8;
+  --accent-strong: #7DD3FC;
+  --accent-tint: rgba(56, 189, 248, 0.12);
+  --accent-soft: rgba(56, 189, 248, 0.5);
+  --bg-glow: rgba(56, 189, 248, 0.18);
+  --mesh-1: rgba(56, 189, 248, 0.18);
+  --mesh-2: rgba(125, 211, 252, 0.10);
+  --mesh-3: rgba(14, 116, 200, 0.22);
+  --border: #222A36;
+  --border-strong: #2E3847;
+  --muted: #1A2230;
+  --success: #22C55E;
+}
+
+html { scroll-behavior: smooth; background: var(--bg); }
+/* Fixed page-bottom gradient — anchored to the viewport bottom, sits behind
+   all content (z-index:-1) above the base bg. Transparent sections reveal
+   it; sections with an opaque background cover it. */
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Mesh gradient (like the supplied radial): transparent core top-center,
+     accent glow around the bottom AND the sides. The base periphery radial
+     keeps it edge-anchored (never floats); two lower-side blobs drift to
+     make it a living mesh. Brand accent only; frozen for reduced-motion. */
+  background-color: transparent;
+  background-image:
+    radial-gradient(45% 55% at 8% 92%,  var(--mesh-1), transparent 70%),
+    radial-gradient(48% 58% at 92% 92%, var(--mesh-2), transparent 70%),
+    radial-gradient(130% 125% at 50% 0%, transparent 48%, var(--mesh-3) 100%);
+  background-repeat: no-repeat;
+  background-size: 150% 150%, 150% 150%, 100% 100%;
+  background-position: 8% 92%, 92% 92%, 50% 0%;
+  animation: mesh-drift 20s ease-in-out infinite alternate;
+}
+@keyframes mesh-drift {
+  from { background-position:  4% 98%, 96% 98%, 50% 0%; }
+  to   { background-position: 18% 78%, 82% 78%, 50% 0%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow { animation: none !important; }
+}
+/* Hide the background gradient on mobile/tablet (desktop-only feature) */
+@media (max-width: 1023px) {
+  .bg-glow { display: none; }
+}
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.display { font-size: clamp(1.875rem, 5.5vw, 3.75rem); line-height: 1.1; letter-spacing: -0.025em; }
+.h1 { font-size: clamp(1.5rem, 3.6vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em; }
+.h2 { font-size: clamp(1.125rem, 1.9vw, 1.625rem); line-height: 1.3; letter-spacing: -0.01em; }
+.body-lg { font-size: clamp(0.9375rem, 1.2vw, 1.1875rem); line-height: 1.55; }
+.body-md { font-size: 1rem; line-height: 1.55; }
+
+/* Mobile-specific typography overrides — boost legibility on small screens */
+@media (max-width: 640px) {
+  .display { font-size: 2.25rem; line-height: 1.1; }     /* 36px */
+  .h1      { font-size: 1.75rem; line-height: 1.2; }      /* 28px */
+  .h2      { font-size: 1.25rem; line-height: 1.3; }      /* 20px */
+  .body-lg { font-size: 1.0625rem; line-height: 1.55; }   /* 17px */
+  .body-md { font-size: 1rem; line-height: 1.55; }        /* 16px */
+}
+
+/* Mobile safety net: never allow horizontal scroll */
+html, body { overflow-x: hidden; }
+/* Allow long words (company names) to break cleanly at mobile widths */
+h1, h2, h3 { overflow-wrap: break-word; word-wrap: break-word; }
+
+/* Focus visibility: 2px ring + 2px offset on every interactive */
+:is(a, button, summary, input, [role="button"]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Auto-hide header on scroll down — position:fixed + transform translateY
+   is the most reliable cross-browser combo for a slide-up effect. */
+#siteHeader {
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+#siteHeader.is-hidden { transform: translateY(-100%); }
+/* Compensate for the now-fixed header so first section doesn't slide under it. */
+body { padding-top: 64px; }
+
+/* Accordion icon rotation */
+details[open] > summary .chev { transform: rotate(180deg); }
+summary::-webkit-details-marker { display: none; }
+summary { list-style: none; cursor: pointer; }
+
+/* FAQ accordion smooth height animation — JS-controlled because native
+   <details> uses display: none on closed content which can't transition. */
+.faq-collapse {
+  overflow: hidden;
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* FAQ icons: keep their original pale (#CCD1DF) color in light mode; only
+   tone them down slightly in dark so they're not overly bright. */
+.dark #faq img { filter: brightness(0.74); }
+
+/* Comparison table row hover */
+tbody tr:hover { background-color: var(--surface-alt); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== NetworkHero — animated SVG composition for hero placeholder ===== */
+.nh-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 620px;
+  margin: 0 auto;
+  --nh-ink: #1E293B;
+  --nh-muted: #64748B;
+  --nh-supplier: #10B981;
+  --nh-client: #6366F1;
+  --nh-partner: #8B5CF6;
+  --nh-service: #F59E0B;
+}
+@keyframes nh-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: .95; } }
+@keyframes nh-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes nh-flow { from { stroke-dashoffset: -100; } to { stroke-dashoffset: 0; } }
+@keyframes nh-spin { to { transform: rotate(360deg); } }
+.nh-core { transform-box: fill-box; transform-origin: center; animation: nh-pulse 3s ease-in-out infinite; }
+.nh-orbit { transform-box: fill-box; transform-origin: center; animation: nh-spin 60s linear infinite; }
+.nh-sat { transform-box: fill-box; transform-origin: center; animation: nh-breathe 4s ease-in-out infinite; }
+.nh-sat-1 { animation-delay: 0s; }
+.nh-sat-2 { animation-delay: .5s; }
+.nh-sat-3 { animation-delay: 1s; }
+.nh-sat-4 { animation-delay: 1.5s; }
+.nh-flow-dots { stroke-dasharray: 2 98; stroke-linecap: round; animation: nh-flow 4s linear infinite; }
+.nh-flow-1 { animation-delay: 0s; }
+.nh-flow-2 { animation-delay: 1s; }
+.nh-flow-3 { animation-delay: 2s; }
+.nh-flow-4 { animation-delay: 3s; }
+
+/* ===== MatchMarquee — endless horizontal scroll under network animation ===== */
+@keyframes mm-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.mm-track {
+  animation: mm-marquee 40s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-track { animation: none; }
+  .mm-viewport { overflow-x: auto; }
+  .mm-fade { display: none; }
+}
+
+/* ===== Card-zone: 3 cards live ABOVE stats in natural 3-col grid ===== */
+.card-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 19px;
+}
+@media (min-width: 1024px) {
+  .card-stack { grid-template-columns: repeat(3, 1fr); }
+  .card-stack > article { will-change: transform, opacity; }
+  /* z-index: client on top during morph, supplier/partner slide in from under */
+  .card-stack [data-card="client"]   { z-index: 2; position: relative; }
+  .card-stack [data-card="supplier"],
+  .card-stack [data-card="partner"]  { z-index: 1; position: relative; }
+}
+/* Mobile: all 3 cards stacked vertically, equal heights, reordered so Client match is on top */
+@media (max-width: 1023px) {
+  .card-stack > article {
+    min-height: 12rem;
+    position: relative;
+    will-change: transform, opacity;
+  }
+  .card-stack [data-card="client"]   { order: 1; z-index: 3; }
+  .card-stack [data-card="supplier"] { order: 2; z-index: 2; }
+  .card-stack [data-card="partner"]  { order: 3; z-index: 1; }
+}
+
+/* ===== Supplier card: horizontal chips marquee ===== */
+.chip-track {
+  animation: mm-marquee 18s linear infinite;
+  will-change: transform;
+}
+
+/* ===== Supplier card: chart growth animation (clip-path reveal, React-style) ===== */
+.supplier-chart .chart-content {
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.8s cubic-bezier(0.85, 0, 0.15, 1),
+          -webkit-clip-path 1.8s cubic-bezier(0.85, 0, 0.15, 1);
+}
+.supplier-chart.animate .chart-content {
+  clip-path: inset(0);
+  -webkit-clip-path: inset(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .supplier-chart .chart-content {
+    clip-path: none;
+    -webkit-clip-path: none;
+  }
+}
+
+/* ===== Client card: slot-machine number reels ===== */
+.slot-machine {
+  display: inline-flex;
+  line-height: 1;
+  vertical-align: baseline;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+.slot-machine .slot {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  width: 0.6em;          /* tight: narrower than tabular digit so no empty gutter */
+  text-align: center;    /* center the visible digit within the slot */
+  line-height: 1;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+}
+.slot-machine .slot-reel,
+.slot-machine .slot-digit { text-align: center; }
+.slot-machine .slot-reel {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  will-change: transform;
+}
+.slot-machine .slot-digit {
+  height: 1em;
+  line-height: 1;
+  display: block;
+}
+/* Reduced motion: skip the spin, park every reel on its final digit
+   (the original rendered plain text instead; visually equivalent). */
+@media (prefers-reduced-motion: reduce) {
+  .slot-machine .slot-reel {
+    transform: translateY(var(--slot-final, 0)) !important;
+    transition: none !important;
+  }
+}
+
+/* ===== Companies card-stack (ported from handoff preview) ===== */
+.cs-scene {
+  position: relative;
+  width: 311px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1.2);
+  transform-origin: center center;
+}
+.cs-stack {
+  position: relative;
+  width: 311px;
+  height: 82.61px;
+}
+.cs-card {
+  position: absolute;
+  top: 0; left: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10.3379px 0;
+  gap: 8.61px;
+  width: 311px;
+  height: 82.61px;
+  background: #FAFAFA;
+  border: 0.861496px solid #FEFEFE;
+  border-radius: 10.3379px;
+  box-shadow:
+    0px -8px 12.3px -10px rgba(0,0,0,0.06),
+    0px -1.72299px 3.44598px rgba(255,255,255,0.15),
+    0px 1.72299px 3.44598px rgba(0,34,46,0.03);
+  backdrop-filter: blur(7.71px);
+  will-change: transform, opacity, filter;
+  transition: transform .6s cubic-bezier(.34,1.32,.5,1),
+              filter .6s ease,
+              opacity .45s ease;
+}
+.cs-card.cs-leaving {
+  transition: transform .2s ease,
+              opacity .2s ease;
+}
+.cs-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  width: 100%;
+  pointer-events: none;
+}
+.cs-thumb {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 9px;
+  object-fit: cover;
+  background: #D4D4D4;       /* fallback before SVG loads */
+  display: block;
+}
+.cs-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cs-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1a2a33;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+.cs-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+/* ===== Testimonials marquee (vertical infinite scroll w/ edge fade) ===== */
+.tt-marquee {
+  position: relative;
+  height: 620px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+.tt-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: tt-scroll-up 45s linear infinite;
+  will-change: transform;
+}
+@media (hover: hover) {
+  .tt-marquee:hover .tt-track { animation-play-state: paused; }
+}
+@keyframes tt-scroll-up {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+/* Pricing cards: hover bg only on hover-capable (desktop) devices, so a
+   tap on touch screens never leaves a sticky highlight. */
+@media (hover: hover) {
+  #pricing article:hover { background-color: var(--surface-alt); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-track { animation: none; }
+}
+
+/* ===== Italy map (interactive regional breakdown) ===== */
+.im-detail {
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.im-detail.is-changing { opacity: 0; }
+
+.im-map-wrap {
+  width: 100%;
+  max-width: 560px;
+  margin-left: auto;
+  transform: scale(1.69) translate(10%, -8%);
+  transform-origin: top center;
+  will-change: transform;
+}
+.im-map-wrap svg { width: 100%; height: auto; display: block; }
+.im-path {
+  fill: var(--border);          /* region body */
+  stroke: var(--bg);            /* gaps between regions = page bg */
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease;
+}
+.im-path:hover {
+  fill: var(--accent-soft);     /* accent @ ~60% */
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.im-path.is-active {
+  fill: var(--fg);              /* selected region: high-contrast in both themes */
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+.im-path.is-active:hover { fill: var(--fg); }  /* don't double-treat the selected region */
+
+/* Floating tooltip */
+.im-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-size: 13px;
+  line-height: 1.4;
+  z-index: 50;
+  max-width: 240px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+.im-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.im-tt-name {
+  font-size: 16px;          /* +20% over the tooltip's 13px base */
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+.im-tt-stats {
+  color: var(--fg-muted);
+  font-size: 12px;
+  display: flex;
+  gap: 10px;
+}
+.im-tt-stats span strong { color: var(--fg); font-weight: 600; }
+.im-tt-hint {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+  color: var(--fg-subtle);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ===== Industries list — SectorDock magnification port ===== */
+/* Ported from assets/components/sector-dock/SectorDock.tsx — rAF-driven
+   transform: scale(var(--scale)) with cosine falloff on hover; serif
+   index numerals + accent dot when active or hovered.                  */
+.sf-ind-list { list-style: none; padding: 0; margin: 0; }
+.sf-ind-item {
+  --scale: 1;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 7px 4px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  color: var(--fg-subtle);
+  transform-origin: left center;
+  transform: scale(var(--scale));
+  will-change: transform;
+  transition: color 0.4s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.sf-ind-item:hover { color: var(--fg); }
+.sf-ind-item.is-active { color: var(--fg); }
+
+.sf-ind-idx {
+  font-family: inherit;            /* Google Sans Flex from <body> via --font-sans */
+  font-size: clamp(1.05rem, 2.1vw, 1.35rem);   /* matches .sf-ind-label */
+  font-weight: 400;                /* matches label weight */
+  width: 2.4ch;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.55;
+  transition: opacity 0.4s ease, color 0.4s ease;
+}
+.sf-ind-item.is-active .sf-ind-idx {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.sf-ind-label {
+  font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+@media (hover: none) {
+  .sf-ind-item { transform: scale(1) !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-ind-item { transform: scale(1) !important; }
+}
+
+.sf-ind-detail {
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== Mobile (≤1023px): horizontal scrolling pill tabs ===== */
+@media (max-width: 1023px) {
+  #sfIndList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 4px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+  }
+  #sfIndList::-webkit-scrollbar { display: none; }
+  /* neutralize Tailwind's space-y-1 (it adds margin-top: 4px to siblings) */
+  #sfIndList > li {
+    flex-shrink: 0;
+    margin-top: 0 !important;
+  }
+  #sfIndList .sf-ind-item {
+    width: auto;
+    padding: 10px 14px;
+    border-radius: 9999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    gap: 8px;
+    transform: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  #sfIndList .sf-ind-item.is-active {
+    background: var(--primary);
+    color: var(--on-primary);
+    border-color: var(--primary);
+  }
+  #sfIndList .sf-ind-item.is-active .sf-ind-idx {
+    color: var(--on-primary);
+    opacity: 0.65;
+  }
+  #sfIndList .sf-ind-idx,
+  #sfIndList .sf-ind-label {
+    font-size: 14px;
+  }
+  #sfIndList .sf-ind-idx { width: auto; }
+  /* Prevent grid-cell blowout: the wide tab content was forcing the grid
+     column to its intrinsic content width (~940px), enlarging the image and
+     shifting text in the right column too. */
+  section[aria-labelledby="industries-it"] > div > div > * {
+    min-width: 0;
+  }
+  /* Tags chips: 2 rows of infinite horizontal marquee (alternating direction).
+     Used by both the Industries section (#sf-ind-tags) and the Italy section
+     (#imIndustries). Each parent sets --marquee-fade-bg to its section bg. */
+  .sf-ind-tags,
+  #imIndustries {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    overflow: hidden;
+    margin-left: 0 !important;
+  }
+  .sf-ind-tags { --marquee-fade-bg: var(--surface-alt); }
+  #imIndustries { --marquee-fade-bg: var(--bg); }
+  .sf-tag-row {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .sf-tag-track {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    animation: sf-tag-marquee 30s linear infinite;
+    will-change: transform;
+  }
+  .sf-tag-row:nth-child(2) .sf-tag-track {
+    animation-duration: 36s;
+    animation-direction: reverse;
+  }
+  .sf-tag-row::before,
+  .sf-tag-row::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 24px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .sf-tag-row::before {
+    left: 0;
+    background: linear-gradient(to right, var(--marquee-fade-bg), transparent);
+  }
+  .sf-tag-row::after {
+    right: 0;
+    background: linear-gradient(to left, var(--marquee-fade-bg), transparent);
+  }
+}
+@keyframes sf-tag-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  .sf-tag-track { animation: none; }
+}
+/* Hide only the SVG map (and its tooltip) on mobile — keep the regional
+   data column intact. */
+@media (max-width: 1023px) {
+  #italy-map .im-map-wrap,
+  #italy-map .im-tooltip { display: none; }
+  /* Region picker — native <select> styled to look inline-with-heading */
+  .im-region-select-wrap {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  .im-region-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-weight: inherit;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 0 24px 0 0;
+    line-height: inherit;
+    outline: none;
+    max-width: 100%;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .im-region-select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .im-region-chevron {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    pointer-events: none;
+    transition: transform 0.2s ease;
+  }
+  .im-region-select[aria-expanded="true"] + .im-region-menu,
+  .im-region-menu:not([hidden]) {
+    display: block;
+  }
+  .im-region-select[aria-expanded="true"] .im-region-chevron {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  .im-region-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 240px;
+    max-height: 320px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 50;
+  }
+  .im-region-menu li {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--fg);
+    border-radius: 8px;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .im-region-menu li:hover {
+    background: var(--surface-alt);
+  }
+  .im-region-menu li[aria-selected="true"] {
+    background: var(--accent);
+    color: var(--on-primary);
+  }
+}
+.sf-ind-detail.is-changing { opacity: 0; }
+
+/* ===== Verification cards (slide 2 visual) ===== */
+/* Same frosted-glass treatment as the counter digits on slide 1, so both
+   sides share a visual language. Three horizontal rows stacked vertically. */
+.sf-vcards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(340px, 90%);
+  transform: scale(1.15);
+  transform-origin: center center;
+}
+.sf-vcard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.sf-vcard-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.sf-vcard-info { min-width: 0; flex: 1; }
+.sf-vcard-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.sf-vcard-subtitle {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+/* ===== Glass Reputation card (slide 3 visual) ===== */
+.sf-rcard {
+  width: min(420px, 92%);
+  aspect-ratio: 1;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 22px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sf-rcard-review-box {
+  margin-top: 29px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+.sf-rcard-quote-icon {
+  flex: none;
+  width: 60px;
+  height: auto;
+  margin-top: 4px;
+  opacity: 0.5;
+}
+.sf-rcard-quote-text { flex: 1; min-width: 0; }
+
+/* ===== Glass counter inside CardStack container (synced to advance) ===== */
+.sf-counter {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+}
+.sfc-digits { display: flex; gap: 8px; }
+.sfc-digit {
+  width: 56px;
+  height: 72px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 36px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+}
+.sfc-window {
+  height: 1em;
+  overflow: hidden;
+  line-height: 1;
+}
+.sfc-reel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sfc-reel > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+.sfc-label {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* ===== Scroll-features: pinned section with 3 fading slides ===== */
+/* Pure cross-fade — no motion. Outgoing fades out (700ms), incoming fades in
+   (900ms with 100ms delay). Material standard easing for soft both ends.
+   Long durations + overlap = no harsh handoff, no perceptible jump. */
+.sf-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sf-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: sf-slide-fade 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+@keyframes sf-slide-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-slide,
+  .sf-slide.is-active {
+    animation: none;
+    transition: opacity 0.15s linear;
+  }
+}
+
+/* ===== Scroll-features mobile (≤1023px): unfold all slides vertically =====
+   Flatten the grid (text-left | visual-right) into a single column where each
+   text slide is followed by its paired visual slide. No pin, no stepper, all
+   slides visible. Implemented via `display: contents` to unwrap the existing
+   text/visual containers + CSS `order` to interleave. */
+@media (max-width: 1023px) {
+  #scroll-features .sf-pin > div > .grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 2.5rem;
+    min-height: 0 !important;
+  }
+  #scroll-features .sf-pin > div > .grid > .flex.flex-col,
+  #scroll-features .sf-text-slides,
+  #scroll-features .sf-visual-slides {
+    display: contents;
+  }
+  #scroll-features .sf-slide {
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  #scroll-features .sf-text-slides .sf-slide[data-slide="0"]   { order: 0; }
+  #scroll-features .sf-visual-slides .sf-slide[data-slide="0"] { order: 1; }
+  #scroll-features .sf-text-slides .sf-slide[data-slide="1"]   { order: 2; }
+  #scroll-features .sf-visual-slides .sf-slide[data-slide="1"] { order: 3; }
+  #scroll-features .sf-text-slides .sf-slide[data-slide="2"]   { order: 4; }
+  #scroll-features .sf-visual-slides .sf-slide[data-slide="2"] { order: 5; }
+  #scroll-features .sf-pin .mt-auto.pt-12 { display: none; }
+  #scroll-features .sf-visual-slides .sf-slide {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 32rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Free up the text-slides min-height (was needed for desktop overlap) */
+  #scroll-features .sf-text-slides { min-height: 0 !important; }
+  /* Fix #1: cs-scene (311×130) — lift up by 40% so there's clear gap between
+     the cards and the counter, sized so it fits the mobile container. */
+  #scroll-features .cs-scene { transform: translateY(-40%) scale(1.08); }
+  /* Fix #2: sf-vcards at scale(1.15) overflows narrow phones — drop the scale. */
+  #scroll-features .sf-vcards { transform: none; }
+  /* Fix #3: sf-rcard (Reputation, slide 2) — give breathing room on narrow phones.
+     Smaller padding, narrower label column, tighter row gap, shorter header gap,
+     smaller header text, and reduced review box top margin. */
+  #scroll-features .sf-rcard {
+    width: 100%;
+    padding: 0;
+  }
+  #scroll-features .sf-rcard .text-4xl {
+    font-size: 28px;
+  }
+  #scroll-features .sf-rcard > div:first-child {
+    margin-bottom: 20px !important;
+  }
+  #scroll-features .sf-rcard .w-32 {
+    width: 96px !important;
+  }
+  #scroll-features .sf-rcard .space-y-2\.5 > div.flex.items-center {
+    gap: 8px !important;
+  }
+  /* Center the star cluster within its flex-1 column (between label and score) */
+  #scroll-features .sf-rcard .flex.gap-0\.5.flex-1 {
+    justify-content: center;
+  }
+  #scroll-features .sf-rcard-review-box {
+    margin-top: 16px;
+  }
+  #scroll-features .sf-rcard-quote-icon {
+    width: 36px;
+  }
+  /* On mobile sf-rcard is fully transparent — no glass, no gradient, no blur.
+     The slide's bg-image shows directly through; only the rcard's typography
+     and the entrance stagger animations remain. */
+  #scroll-features .sf-rcard {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* 10% darkening overlay on the slide 2 bg-image. Inset box-shadow paints
+     between background and content, so the rcard's white text stays bright. */
+  #scroll-features .sf-visual-slides .sf-slide[data-slide="2"] > div {
+    box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.1);
+    /* Gutter between content and the gradient card edge (overrides p-4 16px).
+       sf-rcard is full-width / padding 0, so this is the single padding source. */
+    padding: 22px;
+  }
+  /* Fix #4: tighten internal text-slide spacing on mobile (space-y-6 → space-y-4) */
+  #scroll-features .sf-text-slides .sf-slide.space-y-6 > * + * {
+    margin-top: 1rem !important;
+  }
+  /* Tight gap WITHIN each text↔visual pair (24px) */
+  #scroll-features .sf-pin > div > .grid {
+    gap: 1.5rem !important;
+  }
+  /* Bigger gap BETWEEN pairs — extra margin on the 2nd and 3rd text-slide so
+     the previous pair clearly separates from the next. (gap + margin = ~72px) */
+  #scroll-features .sf-text-slides .sf-slide[data-slide="1"],
+  #scroll-features .sf-text-slides .sf-slide[data-slide="2"] {
+    margin-top: 3rem;
+  }
+}
+/* Scroll-stepper indicator (ported from assets/components/scroll-stepper) */
+.sf-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--surface-alt);
+  border-radius: 9999px;
+  user-select: none;
+}
+.sf-seg {
+  position: relative;
+  height: 8px;
+  width: 8px;
+  border-radius: 9999px;
+  background: var(--border-strong);
+  overflow: hidden;
+  flex: 0 0 auto;
+  transition: width .45s cubic-bezier(.22, 1, .36, 1),
+              background-color .35s ease;
+}
+.sf-seg.is-done { background: var(--fg); }
+.sf-seg.is-active {
+  width: 48px;
+  background: var(--border-strong);
+}
+.sf-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--fg);
+  border-radius: 9999px;
+  transition: width .08s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-seg, .sf-fill { transition: none; }
+}
+
+/* ===== Partner card: industry icons recolor via mask ===== */
+.industry-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  background-color: #C9D0DD;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+          mask: var(--icon) center / contain no-repeat;
+}
+
+/* ===== Partner card: endless vertical scroll of industry tiles (desktop) ===== */
+@keyframes pi-marquee-y {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+/* Mobile: horizontal marquee instead of vertical */
+@keyframes pi-marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.pi-track {
+  animation: pi-marquee-y 30s linear infinite;
+  will-change: transform;
+}
+@media (max-width: 1023px) {
+  .pi-track { animation: pi-marquee-x 30s linear infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pi-track { animation: none; }
+}
