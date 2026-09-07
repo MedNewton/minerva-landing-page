@@ -91,13 +91,15 @@ export function Industries() {
               <p className="sf-ind-desc-lead body-md text-fg font-medium mb-3">{entry.lead}</p>
               <p className="sf-ind-desc-body body-md text-fg-muted">{entry.body}</p>
             </div>
-            <button
-              type="button"
+            <a
+              href="https://www.app.minerva-app.website"
+              target="_blank"
+              rel="noopener noreferrer"
               className="sf-ind-cta inline-flex items-center gap-2 px-2 py-2 rounded-md text-fg font-semibold hover:bg-surface-alt transition-colors group"
             >
               <span>Find matches</span>
               <ArrowRightIcon size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </button>
+            </a>
           </div>
         </div>
       </Container>
