@@ -92,7 +92,7 @@ export function Industries() {
               <p className="sf-ind-desc-body body-md text-fg-muted">{entry.body}</p>
             </div>
             <a
-              href="https://www.app.minerva-app.website"
+              href="https://app.minerva-app.website"
               target="_blank"
               rel="noopener noreferrer"
               className="sf-ind-cta inline-flex items-center gap-2 px-2 py-2 rounded-md text-fg font-semibold hover:bg-surface-alt transition-colors group"

@@ -26,7 +26,7 @@ export function Hero() {
             </p>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mb-8 lg:mb-10">
               <a
-                href="https://www.app.minerva-app.website"
+                href="https://app.minerva-app.website"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 h-11 px-9 rounded-full bg-fg text-bg text-[0.9375rem] font-semibold hover:opacity-90 transition-opacity"
