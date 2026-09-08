@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Google_Sans_Code, Google_Sans_Flex } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import { ThemeRestore } from '@/components/theme/ThemeRestore';
 import { getDictionary } from '@/lib/i18n';
 import { LocaleProvider } from '@/lib/i18n/client';
 import { hasLocale, LOCALES } from '@/lib/i18n/config';
@@ -78,6 +79,8 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
       <body className="text-fg antialiased">
         {/* Fixed page-bottom mesh gradient (behind content); revealed by transparent sections */}
         <div className="bg-glow" aria-hidden="true" />
+        {/* Locale navigation re-renders this layout and resets <html>'s className — restore `.dark` */}
+        <ThemeRestore />
         <LocaleProvider locale={lang} dict={dict}>
           {children}
         </LocaleProvider>

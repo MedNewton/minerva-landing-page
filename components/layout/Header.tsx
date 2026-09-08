@@ -6,8 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Logo } from '@/components/ui/Logo';
 import { MoonIcon, SunIcon } from '@/components/ui/icons';
 import { useI18n } from '@/lib/i18n/client';
-
-const THEME_KEY = 'minerva-theme';
+import { THEME_KEY } from '@/lib/theme';
 
 /**
  * Fixed site header. Auto-hides on scroll down and reveals on scroll up
