@@ -1,7 +1,11 @@
+'use client';
+
 import Image from 'next/image';
-import type { Testimonial } from '@/lib/data/testimonials';
+import { useI18n } from '@/lib/i18n/client';
+import type { Testimonial } from '@/lib/i18n/types';
 
 export function TestimonialCard({ t, hidden = false }: { t: Testimonial; hidden?: boolean }) {
+  const { dict } = useI18n();
   return (
     <article className="bg-surface-alt rounded-3xl p-6 lg:p-7 flex flex-col" aria-hidden={hidden || undefined}>
       <div className="flex items-start justify-between mb-3">
@@ -22,7 +26,7 @@ export function TestimonialCard({ t, hidden = false }: { t: Testimonial; hidden?
             <div className="text-sm font-semibold text-fg">{t.name}</div>
             <div className="text-xs text-fg-subtle mt-0.5">{t.role}</div>
           </div>
-          <div className="flex gap-0.5" aria-label={hidden ? undefined : 'Rating 5 out of 5'}>
+          <div className="flex gap-0.5" aria-label={hidden ? undefined : dict.testimonials.ratingLabel}>
             {Array.from({ length: 5 }, (_, i) => (
               <img key={i} src="/assets/icons/star.svg" alt="" width={16} height={16} aria-hidden="true" />
             ))}

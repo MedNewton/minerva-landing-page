@@ -1,4 +1,6 @@
-import { GROWTH_INDUSTRY_CHIPS } from '@/lib/data/companies';
+'use client';
+
+import { useI18n } from '@/lib/i18n/client';
 
 const CHIP = 'inline-flex items-center px-3 py-1.5 rounded-full bg-surface-alt text-xs font-medium text-fg shrink-0';
 const AXIS_LABEL = 'text-[11px] font-medium text-fg-subtle tracking-wide pointer-events-none select-none';
@@ -6,22 +8,25 @@ const TICK = 'block absolute text-[10px] font-medium text-fg-subtle tracking-wid
 
 /** "Growing every day" — industry chip marquee + accent growth chart. */
 export function SupplierCard() {
+  const { dict } = useI18n();
+  const t = dict.cards.supplier;
+
   return (
     <article data-card="supplier" className="rounded-xl bg-surface p-6 lg:p-7 flex flex-col justify-between overflow-hidden">
       <div>
-        <h3 className="text-2xl lg:text-3xl font-semibold text-fg leading-tight tracking-tight">Growing every day</h3>
-        <p className="text-base text-fg-muted mt-3 leading-snug">More companies. More opportunities. Better matches.</p>
+        <h3 className="text-2xl lg:text-3xl font-semibold text-fg leading-tight tracking-tight">{t.title}</h3>
+        <p className="text-base text-fg-muted mt-3 leading-snug">{t.description}</p>
       </div>
 
       {/* Industry chips: endless horizontal scroll with side fades (desktop only) */}
       <div className="-mx-6 lg:-mx-7 mt-6 relative overflow-hidden hidden lg:block">
         <div className="chip-track flex items-center gap-2 w-max">
-          {GROWTH_INDUSTRY_CHIPS.map((c) => (
+          {t.chips.map((c) => (
             <span key={c} className={CHIP}>
               {c}
             </span>
           ))}
-          {GROWTH_INDUSTRY_CHIPS.map((c) => (
+          {t.chips.map((c) => (
             <span key={`dup-${c}`} aria-hidden="true" className={CHIP}>
               {c}
             </span>
@@ -60,8 +65,8 @@ export function SupplierCard() {
             />
           </g>
         </svg>
-        <span className={`hidden lg:block absolute left-3 top-1/2 -translate-y-1/2 [writing-mode:vertical-rl] rotate-180 ${AXIS_LABEL}`}>Level of growth</span>
-        <span className={`hidden lg:block absolute bottom-2 right-6 ${AXIS_LABEL}`}>N. of partnerships</span>
+        <span className={`hidden lg:block absolute left-3 top-1/2 -translate-y-1/2 [writing-mode:vertical-rl] rotate-180 ${AXIS_LABEL}`}>{t.axisY}</span>
+        <span className={`hidden lg:block absolute bottom-2 right-6 ${AXIS_LABEL}`}>{t.axisX}</span>
         <span className={`${TICK} left-9 top-[25%] -translate-y-1/2`}>3×</span>
         <span className={`${TICK} left-9 top-[50%] -translate-y-1/2`}>2×</span>
         <span className={`${TICK} left-9 top-[75%] -translate-y-1/2`}>1×</span>

@@ -1,7 +1,10 @@
-import type { CSSProperties } from 'react';
-import { PARTNER_TILES } from '@/lib/data/companies';
+'use client';
 
-function Tile({ icon, title, subtitle, hidden }: (typeof PARTNER_TILES)[number] & { hidden?: boolean }) {
+import type { CSSProperties } from 'react';
+import { useI18n } from '@/lib/i18n/client';
+import type { PartnerTile } from '@/lib/i18n/types';
+
+function Tile({ icon, title, subtitle, hidden }: PartnerTile & { hidden?: boolean }) {
   return (
     <div className="flex items-center gap-3 p-2.5 shrink-0" aria-hidden={hidden || undefined}>
       <span className="industry-icon" style={{ '--icon': `url('${icon}')` } as CSSProperties} />
@@ -15,21 +18,24 @@ function Tile({ icon, title, subtitle, hidden }: (typeof PARTNER_TILES)[number] 
 
 /** "100+ industries" — endless scroll of tiles: vertical on desktop, horizontal on mobile. */
 export function PartnerCard() {
+  const { dict } = useI18n();
+  const t = dict.cards.partner;
+
   return (
     <article data-card="partner" className="rounded-xl bg-surface p-6 lg:p-7 flex flex-col overflow-hidden">
       <div>
-        <h3 className="text-2xl lg:text-3xl font-semibold text-fg leading-tight tracking-tight">100+ industries.</h3>
-        <p className="text-base text-fg-muted mt-3 leading-snug">Unlimited collaboration opportunities.</p>
+        <h3 className="text-2xl lg:text-3xl font-semibold text-fg leading-tight tracking-tight">{t.title}</h3>
+        <p className="text-base text-fg-muted mt-3 leading-snug">{t.description}</p>
       </div>
 
       <div className="relative flex-1 mt-6">
         <div className="absolute inset-0 overflow-hidden">
           <div className="pi-track flex flex-row lg:flex-col gap-3 w-max lg:w-auto items-start">
-            {PARTNER_TILES.map((t) => (
-              <Tile key={t.title} {...t} />
+            {t.tiles.map((tile) => (
+              <Tile key={tile.title} {...tile} />
             ))}
-            {PARTNER_TILES.map((t) => (
-              <Tile key={`dup-${t.title}`} {...t} hidden />
+            {t.tiles.map((tile) => (
+              <Tile key={`dup-${tile.title}`} {...tile} hidden />
             ))}
           </div>
           <div className="pointer-events-none absolute inset-x-0 top-0 h-10 hidden lg:block" style={{ background: 'linear-gradient(to bottom, var(--surface), transparent)' }} />

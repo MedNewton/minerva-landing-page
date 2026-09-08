@@ -2,10 +2,10 @@
 
 import { useRef } from 'react';
 import { Container } from '@/components/ui/Container';
+import { useI18n } from '@/lib/i18n/client';
 import { MatchingPreview } from './scroll-features/MatchingPreview';
 import { ReputationCard } from './scroll-features/ReputationCard';
 import { VerificationCards } from './scroll-features/VerificationCards';
-import { TEXT_SLIDES } from './scroll-features/slides';
 import { useScrollFeatures } from './scroll-features/useScrollFeatures';
 
 const VISUALS = [MatchingPreview, VerificationCards, ReputationCard];
@@ -16,6 +16,8 @@ const VISUALS = [MatchingPreview, VerificationCards, ReputationCard];
  * vertically on mobile (see the `#scroll-features` rules in globals.css).
  */
 export function ScrollFeatures() {
+  const { dict } = useI18n();
+  const t = dict.scrollFeatures;
   const sectionRef = useRef<HTMLElement>(null);
   useScrollFeatures(sectionRef);
 
@@ -27,7 +29,7 @@ export function ScrollFeatures() {
             {/* LEFT: text slides + scroll indicator */}
             <div className="flex flex-col">
               <div className="sf-text-slides relative min-h-[460px] lg:min-h-[480px]">
-                {TEXT_SLIDES.map((slide, i) => (
+                {t.slides.map((slide, i) => (
                   <div key={i} className={`sf-slide space-y-6${i === 0 ? ' is-active' : ''}`} data-slide={i}>
                     <h2 className="h1 font-semibold text-fg leading-tight">{slide.heading}</h2>
                     {slide.intro && <p className="body-md text-fg-muted max-w-md">{slide.intro}</p>}
@@ -45,14 +47,14 @@ export function ScrollFeatures() {
               </div>
 
               <div className="mt-auto pt-12">
-                <div className="sf-indicator" role="tablist" aria-label="Section progress">
-                  {TEXT_SLIDES.map((_, i) => (
+                <div className="sf-indicator" role="tablist" aria-label={t.progressLabel}>
+                  {t.slides.map((_, i) => (
                     <span
                       key={i}
                       className={`sf-seg${i === 0 ? ' is-active' : ''}`}
                       role="tab"
                       aria-selected={i === 0}
-                      aria-label={`Step ${i + 1} of ${TEXT_SLIDES.length}`}
+                      aria-label={t.stepLabel.replace('{n}', String(i + 1)).replace('{total}', String(t.slides.length))}
                       data-step={i}
                     >
                       <span className="sf-fill" />

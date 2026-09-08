@@ -1,19 +1,22 @@
+'use client';
+
 import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { CheckIcon, MinusIcon } from '@/components/ui/icons';
-import { COMPARISON_ROWS } from '@/lib/data/comparison';
+import { useI18n } from '@/lib/i18n/client';
 
 const CELL = 'py-4 px-5 lg:px-6 align-top';
 
 export function Comparison() {
+  const { dict } = useI18n();
+  const t = dict.comparison;
+
   return (
     <section className="py-20 lg:py-28 bg-surface-alt border-y border-border">
       <Container>
         <div className="mb-12 lg:mb-16">
-          <Eyebrow>Compared to alternatives</Eyebrow>
-          <h2 className="h1 font-semibold text-fg">
-            Compare how MINERVA helps companies to connect with compatible partners.
-          </h2>
+          <Eyebrow>{t.eyebrow}</Eyebrow>
+          <h2 className="h1 font-semibold text-fg">{t.heading}</h2>
         </div>
 
         <div className="border border-border rounded-xl overflow-hidden bg-surface">
@@ -22,7 +25,7 @@ export function Comparison() {
               <thead>
                 <tr className="border-b border-border bg-surface-alt dark:bg-surface">
                   <th scope="col" className="text-left py-4 px-5 lg:px-6 font-semibold text-fg w-[34%]">
-                    Capability
+                    {t.capability}
                   </th>
                   <th scope="col" className="text-left py-4 px-5 lg:px-6 font-semibold text-fg whitespace-nowrap">
                     <div className="flex items-center gap-2">
@@ -31,12 +34,12 @@ export function Comparison() {
                     </div>
                   </th>
                   <th scope="col" className="text-left py-4 px-5 lg:px-6 font-semibold text-fg whitespace-nowrap">
-                    Traditional Business Discovery
+                    {t.traditional}
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {COMPARISON_ROWS.map((row) => {
+                {t.rows.map((row) => {
                   const mono = row.mono ? ' font-mono' : '';
                   return (
                     <tr key={row.capability}>
@@ -50,12 +53,12 @@ export function Comparison() {
                         </span>
                       </td>
                       <td className={`${CELL} text-fg-muted${mono} whitespace-nowrap`}>
-                        {typeof row.traditional === 'string' ? (
+                        {row.traditional !== null ? (
                           row.traditional
                         ) : (
                           <span className="inline-flex items-center gap-1.5">
                             <MinusIcon className="text-fg-subtle" />
-                            None
+                            {t.none}
                           </span>
                         )}
                       </td>

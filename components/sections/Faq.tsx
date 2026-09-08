@@ -2,11 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container';
-import { FAQ_COLUMNS } from '@/lib/data/faq';
+import { useI18n } from '@/lib/i18n/client';
 import { prefersReducedMotion } from '@/lib/media';
 import { FaqItem } from './faq/FaqItem';
 
 export function Faq() {
+  const { dict } = useI18n();
+  const t = dict.faq;
   const sectionRef = useRef<HTMLElement>(null);
 
   // Only one <details> open at a time.
@@ -74,28 +76,28 @@ export function Faq() {
     <section ref={sectionRef} id="faq" className="py-20 lg:py-28 bg-surface-alt border-t border-border">
       <Container>
         <div className="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
-          <h2 className="h1 font-semibold text-fg mb-4">Frequently asked questions</h2>
-          <p className="body-lg text-fg-muted">Answers to the most common questions Italian PMI have about Minerva.</p>
+          <h2 className="h1 font-semibold text-fg mb-4">{t.heading}</h2>
+          <p className="body-lg text-fg-muted">{t.description}</p>
         </div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 items-start">
-          {FAQ_COLUMNS.map((column, c) => (
+          {t.columns.map((column, c) => (
             <div key={c} className="space-y-3">
               {column.map((item) => (
                 <FaqItem key={item.question} item={item} />
               ))}
 
-              {c === FAQ_COLUMNS.length - 1 && (
+              {c === t.columns.length - 1 && (
                 <div className="flex items-center justify-between gap-4 bg-surface dark:bg-[#242C3A] rounded-xl px-5 h-[61px]">
                   <div className="flex items-center gap-4 min-w-0">
                     <img src="/assets/icons/faq-contact.svg" alt="" width={29} height={29} aria-hidden="true" className="shrink-0" />
-                    <span className="font-semibold text-fg">Have more questions?</span>
+                    <span className="font-semibold text-fg">{t.moreQuestions}</span>
                   </div>
                   <a
                     href="#contact"
                     className="inline-flex items-center justify-center shrink-0 whitespace-nowrap h-9 px-5 rounded-full border border-border-strong bg-surface text-fg text-sm font-semibold hover:bg-surface-alt transition-colors"
                   >
-                    Contact us
+                    {t.contactUs}
                   </a>
                 </div>
               )}

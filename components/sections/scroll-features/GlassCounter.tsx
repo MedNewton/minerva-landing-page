@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useI18n } from '@/lib/i18n/client';
 
 const TRANSITION_MS = 750;
 const REEL = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]; // 0–9 plus a duplicate 0 for forward wrap
@@ -14,6 +15,7 @@ const toDigits = (n: number) => String(n).padStart(2, '0').split('').map(Number)
  * forward — never a reverse spin.
  */
 export function GlassCounter({ count }: { count: number }) {
+  const { dict } = useI18n();
   const reelRefs = useRef<Array<HTMLDivElement | null>>([]);
   const currentRef = useRef<number[] | null>(null);
   const initial = toDigits(count);
@@ -76,7 +78,7 @@ export function GlassCounter({ count }: { count: number }) {
           </div>
         ))}
       </div>
-      <p className="sfc-label">Candidate for matching</p>
+      <p className="sfc-label">{dict.scrollFeatures.counterLabel}</p>
     </div>
   );
 }

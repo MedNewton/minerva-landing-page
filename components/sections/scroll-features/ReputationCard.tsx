@@ -1,5 +1,7 @@
+'use client';
+
 import { StarIcon } from '@/components/ui/icons';
-import { REPUTATION } from './slides';
+import { useI18n } from '@/lib/i18n/client';
 
 /**
  * Slide 3 visual: glass reputation card.
@@ -7,6 +9,9 @@ import { REPUTATION } from './slides';
  * by walking `.sf-rcard` children [0], [1] and `.sf-rcard-review-box`.
  */
 export function ReputationCard() {
+  const { dict } = useI18n();
+  const t = dict.scrollFeatures.reputation;
+
   return (
     <div
       className="w-full h-full rounded-3xl bg-surface-alt bg-cover bg-center flex items-center justify-center overflow-hidden p-4"
@@ -15,14 +20,14 @@ export function ReputationCard() {
       <div className="sf-rcard" aria-hidden="true">
         <div className="flex items-start justify-between mb-[34px]">
           <div>
-            <div className="text-4xl font-bold leading-none">Reputation</div>
+            <div className="text-4xl font-bold leading-none">{t.title}</div>
             <div className="text-xs mt-2" style={{ color: 'rgba(255,255,255,0.65)' }}>
-              {REPUTATION.reviews}
+              {t.reviews}
             </div>
           </div>
           <div className="flex items-baseline gap-1">
             <span className="text-4xl font-bold leading-none" style={{ color: '#fff' }}>
-              {REPUTATION.score}
+              {t.score}
             </span>
             <span className="text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
               /5
@@ -31,7 +36,7 @@ export function ReputationCard() {
         </div>
 
         <div className="space-y-2.5 px-[3px]">
-          {REPUTATION.categories.map((c) => (
+          {t.categories.map((c) => (
             <div key={c.label} className="flex items-center gap-3">
               <span className="text-sm w-32 shrink-0" style={{ color: '#fff' }}>
                 {c.label}
@@ -50,7 +55,7 @@ export function ReputationCard() {
           <img src="/assets/icons/quote.svg" alt="" className="sf-rcard-quote-icon" />
           <div className="sf-rcard-quote-text">
             <p className="text-base font-medium" style={{ color: '#fff' }}>
-              {REPUTATION.quote}
+              {t.quote}
             </p>
           </div>
         </div>

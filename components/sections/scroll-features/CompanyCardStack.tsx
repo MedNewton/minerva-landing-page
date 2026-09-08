@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { STACK_COMPANIES } from '@/lib/data/companies';
+import { useI18n } from '@/lib/i18n/client';
 import { prefersReducedMotion } from '@/lib/media';
 
 const OFFSET = 11;
@@ -19,6 +19,8 @@ const LEAVE_MS = 200;
  * so the glass counter underneath can tick in sync.
  */
 export function CompanyCardStack({ onAdvance }: { onAdvance: () => void }) {
+  const { dict } = useI18n();
+  const companies = dict.scrollFeatures.stackCompanies;
   const mountRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const onAdvanceRef = useRef(onAdvance);
@@ -29,7 +31,7 @@ export function CompanyCardStack({ onAdvance }: { onAdvance: () => void }) {
   useEffect(() => {
     const mount = mountRef.current;
     const cards = cardRefs.current.filter((c): c is HTMLDivElement => c !== null);
-    if (!mount || cards.length !== STACK_COMPANIES.length) return;
+    if (!mount || cards.length !== companies.length) return;
 
     let order = cards.map((_, i) => i);
     let leaveTimer: ReturnType<typeof setTimeout> | null = null;
@@ -93,12 +95,12 @@ export function CompanyCardStack({ onAdvance }: { onAdvance: () => void }) {
       mount.removeEventListener('mouseenter', pause);
       mount.removeEventListener('mouseleave', resume);
     };
-  }, []);
+  }, [companies.length]);
 
   return (
     <div className="cs-scene">
       <div className="cs-stack" ref={mountRef}>
-        {STACK_COMPANIES.map((item, i) => (
+        {companies.map((item, i) => (
           <div
             key={item.title}
             className="cs-card"

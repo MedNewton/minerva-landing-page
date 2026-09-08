@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@/components/ui/icons';
 import type { RegionSlug } from '@/lib/data/italy-map-paths';
-import { REGIONS } from '@/lib/data/regions';
+import { REGION_BASE } from '@/lib/data/regions';
+import { useI18n } from '@/lib/i18n/client';
 
 interface Props {
   value: RegionSlug;
@@ -16,6 +17,7 @@ interface Props {
  * so it can be styled like the heading text.
  */
 export function RegionPicker({ value, onChange }: Props) {
+  const { dict } = useI18n();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLSpanElement>(null);
 
@@ -36,14 +38,14 @@ export function RegionPicker({ value, onChange }: Props) {
         className="im-region-select"
         aria-expanded={open}
         aria-haspopup="listbox"
-        aria-label="Choose region"
+        aria-label={dict.map.chooseRegion}
         onClick={() => setOpen((o) => !o)}
       >
-        <span>{REGIONS[value].name}</span>
+        <span>{REGION_BASE[value].name}</span>
         <ChevronDownIcon className="im-region-chevron" strokeWidth={2.5} />
       </button>
       <ul className="im-region-menu" role="listbox" hidden={!open}>
-        {(Object.keys(REGIONS) as RegionSlug[]).map((slug) => (
+        {(Object.keys(REGION_BASE) as RegionSlug[]).map((slug) => (
           <li
             key={slug}
             role="option"
@@ -54,7 +56,7 @@ export function RegionPicker({ value, onChange }: Props) {
               setOpen(false);
             }}
           >
-            {REGIONS[slug].name}
+            {REGION_BASE[slug].name}
           </li>
         ))}
       </ul>

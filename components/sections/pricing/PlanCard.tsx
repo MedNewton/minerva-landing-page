@@ -1,4 +1,7 @@
-import type { Plan } from '@/lib/data/plans';
+'use client';
+
+import { useI18n } from '@/lib/i18n/client';
+import type { Plan } from '@/lib/i18n/types';
 
 const CTA_BASE = 'inline-flex items-center justify-center h-11 px-9 rounded-full text-[0.9375rem] font-semibold';
 const CTA_VARIANT = {
@@ -7,6 +10,7 @@ const CTA_VARIANT = {
 };
 
 export function PlanCard({ plan }: { plan: Plan }) {
+  const { dict } = useI18n();
   return (
     <article className="rounded-[1.5rem] p-3.5 lg:p-[18px] flex flex-col transition-colors duration-200">
       <div className="flex items-center gap-3 mb-5 lg:mb-6">
@@ -19,7 +23,7 @@ export function PlanCard({ plan }: { plan: Plan }) {
       <div className="flex items-center justify-between gap-3 mb-5 lg:mb-6">
         <div className="flex items-baseline gap-1">
           <span className="text-2xl lg:text-[32px] font-medium text-fg leading-none">{plan.price}</span>
-          <span className="text-sm text-fg-muted">/ month</span>
+          <span className="text-sm text-fg-muted">{dict.pricing.perMonth}</span>
         </div>
         <a href={plan.cta.href} className={`${CTA_BASE} ${CTA_VARIANT[plan.cta.variant]}`}>
           {plan.cta.label}
