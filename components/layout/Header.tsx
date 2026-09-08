@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { LanguageSwitch } from '@/components/layout/LanguageSwitch';
 import { Container } from '@/components/ui/Container';
 import { Logo } from '@/components/ui/Logo';
 import { MoonIcon, SunIcon } from '@/components/ui/icons';
-import { NAV_LINKS } from '@/lib/data/navigation';
+import { useI18n } from '@/lib/i18n/client';
 
 const THEME_KEY = 'minerva-theme';
 
@@ -12,9 +13,10 @@ const THEME_KEY = 'minerva-theme';
  * Fixed site header. Auto-hides on scroll down and reveals on scroll up
  * (CSS transform on `.is-hidden`). Hosts the dark-mode toggle — the icon swap
  * is pure CSS (`dark:` variants), the click just flips the `.dark` class and
- * persists the choice.
+ * persists the choice — and the EN/IT language switch.
  */
 export function Header() {
+  const { dict } = useI18n();
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export function Header() {
           <Logo />
 
           <div className="hidden md:flex items-center gap-7 text-sm">
-            {NAV_LINKS.map((l) => (
+            {dict.header.nav.map((l) => (
               <a key={l.href} href={l.href} className="text-fg-muted hover:text-fg transition-colors duration-150">
                 {l.label}
               </a>
@@ -69,10 +71,11 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-2">
+            <LanguageSwitch />
             <button
               type="button"
               onClick={toggleTheme}
-              aria-label="Toggle dark mode"
+              aria-label={dict.header.toggleTheme}
               className="h-10 w-10 inline-flex items-center justify-center rounded-[10px] text-fg-muted hover:text-fg hover:bg-muted transition-colors duration-150"
             >
               <SunIcon className="hidden dark:block" />
@@ -84,7 +87,7 @@ export function Header() {
               rel="noopener noreferrer"
               className="hidden sm:inline-flex text-sm text-fg-muted hover:text-fg px-3 h-10 items-center rounded-[10px] transition-colors duration-150"
             >
-              Sign in
+              {dict.header.signIn}
             </a>
           </div>
         </nav>

@@ -3,11 +3,14 @@
 import { useRef } from 'react';
 import { SlotNumber } from '@/components/ui/SlotNumber';
 import { CheckCircleIcon } from '@/components/ui/icons';
-import { CLIENT_MATCH } from '@/lib/data/companies';
+import { useI18n } from '@/lib/i18n/client';
 import { useSlotMachines } from '@/lib/hooks/useSlotMachines';
 
 /** "Client match" scorecard — the card that doubles as the hero visual at scroll=0. */
 export function ClientCard() {
+  const { dict } = useI18n();
+  const t = dict.cards.client;
+  const match = t.match;
   const cardRef = useRef<HTMLElement>(null);
   // Small card: spin every number and grow every bar together when it enters view.
   useSlotMachines(cardRef, { mode: 'container', threshold: 0.3, animateBars: true });
@@ -17,18 +20,18 @@ export function ClientCard() {
       <div className="flex items-center justify-between text-sm sm:text-xs text-fg-subtle mb-5">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-success" />
-          Client match
+          {t.badge}
         </span>
-        <span className="font-mono hidden sm:inline-block">{CLIENT_MATCH.ticket}</span>
+        <span className="font-mono hidden sm:inline-block">{match.ticket}</span>
         {/* mobile: compact score in the top-right */}
         <span className="font-mono sm:hidden text-base font-semibold text-fg">
-          <SlotNumber value={CLIENT_MATCH.score} />
+          <SlotNumber value={match.score} />
           <span className="text-fg-muted">/100</span>
         </span>
       </div>
 
       <div className="space-y-3 sm:mb-6">
-        {CLIENT_MATCH.companies.map((c) => (
+        {match.companies.map((c) => (
           <div key={c.name} className="flex items-center gap-3">
             <img src={c.logo} alt="" className="h-10 w-10 sm:h-9 sm:w-9 rounded shrink-0" />
             <div className="min-w-0">
@@ -42,19 +45,19 @@ export function ClientCard() {
       {/* desktop-only: big compatibility score */}
       <div className="pt-5 mb-5 border-t border-border hidden sm:flex items-center justify-between">
         <div className="text-[0.8125rem] leading-tight">
-          Compatibility
+          {t.scoreLabel[0]}
           <br />
-          score
+          {t.scoreLabel[1]}
         </div>
         <div className="font-mono text-[2.25rem] leading-none font-medium tracking-tight">
-          <SlotNumber value={CLIENT_MATCH.score} />
+          <SlotNumber value={match.score} />
           <span className="text-base text-fg-subtle ml-1">/100</span>
         </div>
       </div>
 
       {/* desktop-only: dimension bars */}
       <div className="space-y-2.5 mb-5 hidden sm:block">
-        {CLIENT_MATCH.dimensions.map((d) => (
+        {match.dimensions.map((d) => (
           <div key={d.label} className="flex items-center gap-3">
             <span className="text-[0.8125rem] flex-1 truncate">{d.label}</span>
             <div className="w-20 sm:w-24 h-1 rounded-full bg-muted overflow-hidden">
@@ -69,9 +72,9 @@ export function ClientCard() {
       <div className="pt-4 border-t border-border hidden sm:flex items-center justify-between text-xs">
         <span className="inline-flex items-center gap-1.5 text-fg-subtle">
           <CheckCircleIcon size={13} strokeWidth={2.25} className="text-success" />
-          Verified · Camera di Commercio
+          {t.verified}
         </span>
-        <span className="font-mono text-fg-subtle">{CLIENT_MATCH.verifiedOn}</span>
+        <span className="font-mono text-fg-subtle">{match.verifiedOn}</span>
       </div>
     </article>
   );

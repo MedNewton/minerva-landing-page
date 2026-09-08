@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { Google_Sans_Code, Google_Sans_Flex } from 'next/font/google';
-import './globals.css';
+import { notFound } from 'next/navigation';
+import { getDictionary } from '@/lib/i18n';
+import { LocaleProvider } from '@/lib/i18n/client';
+import { hasLocale, LOCALES } from '@/lib/i18n/config';
+import '../globals.css';
 
 const sans = Google_Sans_Flex({
   subsets: ['latin'],
@@ -15,11 +19,26 @@ const mono = Google_Sans_Code({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: 'Minerva — Find Italian partners who share how you operate',
-  description:
-    'B2B matchmaking for Italian PMI on 47 dimensions of operating culture. Verified through Camera di Commercio. GDPR by design.',
-};
+export function generateStaticParams() {
+  return LOCALES.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const dict = getDictionary(lang);
+  return {
+    title: dict.meta.title,
+    description: dict.meta.description,
+    alternates: {
+      languages: { en: '/en', it: '/it' },
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -46,16 +65,22 @@ const themeInitScript = `
 })();
 `;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children, params }: LayoutProps<'/[lang]'>) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const dict = getDictionary(lang);
+
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="text-fg antialiased">
         {/* Fixed page-bottom mesh gradient (behind content); revealed by transparent sections */}
         <div className="bg-glow" aria-hidden="true" />
-        {children}
+        <LocaleProvider locale={lang} dict={dict}>
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

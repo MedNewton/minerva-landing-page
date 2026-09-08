@@ -6,7 +6,8 @@ import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TagCloud } from '@/components/ui/TagCloud';
 import { ArrowRightIcon } from '@/components/ui/icons';
-import { INDUSTRIES, type IndustryId } from '@/lib/data/industries';
+import { useI18n } from '@/lib/i18n/client';
+import type { IndustryId } from '@/lib/i18n/types';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 import { MQ } from '@/lib/media';
 import { useDockMagnification } from './industries/useDockMagnification';
@@ -19,8 +20,11 @@ const FADE_MS = 300;
  * image/tags/copy, and fades back in.
  */
 export function Industries() {
-  const [active, setActive] = useState<IndustryId>(INDUSTRIES[0].id); // highlighted tab (immediate)
-  const [shown, setShown] = useState<IndustryId>(INDUSTRIES[0].id); // panel content (after fade-out)
+  const { dict } = useI18n();
+  const t = dict.industries;
+  const industries = t.items;
+  const [active, setActive] = useState<IndustryId>(industries[0].id); // highlighted tab (immediate)
+  const [shown, setShown] = useState<IndustryId>(industries[0].id); // panel content (after fade-out)
   const [changing, setChanging] = useState(false);
   const isMobile = useMediaQuery(MQ.mobile);
   const listRef = useRef<HTMLUListElement>(null);
@@ -42,19 +46,19 @@ export function Industries() {
     }, FADE_MS);
   };
 
-  const entry = INDUSTRIES.find((i) => i.id === shown) ?? INDUSTRIES[0];
+  const entry = industries.find((i) => i.id === shown) ?? industries[0];
 
   return (
     <section aria-labelledby="industries-it" className="py-20 lg:py-28 bg-surface-alt dark:bg-bg border-y border-border">
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>
-            <Eyebrow uppercase>Who Minerva is for</Eyebrow>
+            <Eyebrow uppercase>{t.eyebrow}</Eyebrow>
             <h2 id="industries-it" className="h1 font-semibold text-fg mb-10 lg:mb-12">
-              Built for the Italian productive fabric
+              {t.heading}
             </h2>
-            <ul ref={listRef} className="sf-ind-list space-y-1" id="sfIndList" role="tablist" aria-label="Industries">
-              {INDUSTRIES.map((ind, i) => {
+            <ul ref={listRef} className="sf-ind-list space-y-1" id="sfIndList" role="tablist" aria-label={t.listLabel}>
+              {industries.map((ind, i) => {
                 const on = ind.id === active;
                 return (
                   <li key={ind.id}>
@@ -97,7 +101,7 @@ export function Industries() {
               rel="noopener noreferrer"
               className="sf-ind-cta inline-flex items-center gap-2 px-2 py-2 rounded-md text-fg font-semibold hover:bg-surface-alt transition-colors group"
             >
-              <span>Find matches</span>
+              <span>{t.cta}</span>
               <ArrowRightIcon size={16} className="transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>

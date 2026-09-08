@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
-import { PLANS } from '@/lib/data/plans';
+import { useI18n } from '@/lib/i18n/client';
 import { gsap } from '@/lib/gsap';
 import { prefersReducedMotion } from '@/lib/media';
 import { PlanCard } from './pricing/PlanCard';
@@ -14,6 +14,7 @@ import { PlanCard } from './pricing/PlanCard';
  * stacked mobile cards animate one by one as the user reaches them.
  */
 export function Pricing() {
+  const { dict } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -46,11 +47,11 @@ export function Pricing() {
     <section ref={sectionRef} id="pricing" className="py-20 lg:py-28">
       <Container>
         <div className="max-w-3xl mx-auto text-center mb-14 lg:mb-16">
-          <Eyebrow uppercase>Plans and pricing</Eyebrow>
+          <Eyebrow uppercase>{dict.pricing.eyebrow}</Eyebrow>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 max-w-6xl mx-auto">
-          {PLANS.map((plan) => (
+          {dict.pricing.plans.map((plan) => (
             <PlanCard key={plan.id} plan={plan} />
           ))}
         </div>

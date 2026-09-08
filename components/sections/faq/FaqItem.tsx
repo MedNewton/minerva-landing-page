@@ -1,11 +1,11 @@
 import { ChevronDownIcon } from '@/components/ui/icons';
-import type { FaqItem as FaqItemData } from '@/lib/data/faq';
+import type { FaqEntry } from '@/lib/i18n/types';
 
 /**
  * Native <details>. Open/close animation and single-open behaviour are wired
  * imperatively by <Faq/> so the markup stays semantic and works without JS.
  */
-export function FaqItem({ item }: { item: FaqItemData }) {
+export function FaqItem({ item }: { item: FaqEntry }) {
   return (
     <details className="group bg-surface dark:bg-[#242C3A] rounded-xl">
       <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer">
