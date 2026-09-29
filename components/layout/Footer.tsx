@@ -5,8 +5,11 @@ import { Logo } from '@/components/ui/Logo';
 import { useI18n } from '@/lib/i18n/client';
 
 export function Footer() {
-  const { dict } = useI18n();
+  const { dict, locale } = useI18n();
   const t = dict.footer;
+  // Placeholder links ('#') stay as-is; real paths and section anchors get the locale prefix
+  // so they resolve from subpages like /en/terms too.
+  const localize = (href: string) => (href === '#' ? href : `/${locale}${href}`);
 
   return (
     <footer className="bg-surface-alt">
@@ -29,7 +32,7 @@ export function Footer() {
                 <ul className="space-y-2.5 text-sm">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <a href={l.href} className="text-fg-muted hover:text-fg transition-colors duration-150">
+                      <a href={localize(l.href)} className="text-fg-muted hover:text-fg transition-colors duration-150">
                         {l.label}
                       </a>
                     </li>

@@ -612,9 +612,9 @@ export const en: Dictionary = {
       {
         title: 'Legal',
         links: [
-          { label: 'Terms', href: '#' },
-          { label: 'Privacy', href: '#' },
-          { label: 'Cookie policy', href: '#' },
+          { label: 'Terms', href: '/terms' },
+          { label: 'Privacy', href: '/privacy' },
+          { label: 'Cookie policy', href: '/cookie-policy' },
           { label: 'GDPR contact', href: '#' },
         ],
       },
@@ -630,5 +630,25 @@ export const en: Dictionary = {
     ],
     copyright: '© 2026 Minerva SRL. All rights reserved.',
     tagline: 'Built in Milano · Made in Italy',
+  },
+
+  legal: {
+    backHome: 'Back to home',
+    languageNote:
+      'These legal documents are provided in Italian, which is their legally binding language.',
+    docs: {
+      terms: {
+        title: 'Terms and Conditions of Use',
+        description: 'Terms and conditions governing access to and use of the MINERVA platform.',
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        description: 'How MINERVA collects, uses, stores, and protects personal data (GDPR).',
+      },
+      'cookie-policy': {
+        title: 'Cookie Policy',
+        description: 'Information on the use of cookies and tracking technologies on the MINERVA platform.',
+      },
+    },
   },
 };

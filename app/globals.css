@@ -1079,3 +1079,49 @@ tbody tr:hover { background-color: var(--surface-alt); }
 @media (prefers-reduced-motion: reduce) {
   .pi-track { animation: none; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Legal document prose (Markdown rendered by lib/legal.ts)           */
+/* ------------------------------------------------------------------ */
+
+.legal-prose {
+  color: var(--fg-muted);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+.legal-prose h1,
+.legal-prose h2,
+.legal-prose h3,
+.legal-prose h4 {
+  color: var(--fg);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 2.25rem 0 0.875rem;
+}
+.legal-prose h1 { font-size: 1.5rem; }
+.legal-prose h2 { font-size: 1.25rem; }
+.legal-prose h3 { font-size: 1.0625rem; }
+.legal-prose h4 { font-size: 1rem; }
+.legal-prose p { margin: 0.875rem 0; }
+.legal-prose strong { color: var(--fg); font-weight: 600; }
+.legal-prose ul,
+.legal-prose ol {
+  margin: 0.875rem 0;
+  padding-left: 1.5rem;
+}
+.legal-prose ul { list-style: disc; }
+.legal-prose ol { list-style: decimal; }
+.legal-prose li { margin: 0.375rem 0; }
+.legal-prose li::marker { color: var(--fg-subtle); }
+.legal-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal-prose a:hover { color: var(--accent-strong); }
+.legal-prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
