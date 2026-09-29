@@ -612,9 +612,9 @@ export const it: Dictionary = {
       {
         title: 'Legale',
         links: [
-          { label: 'Termini', href: '#' },
-          { label: 'Privacy', href: '#' },
-          { label: 'Cookie policy', href: '#' },
+          { label: 'Termini', href: '/terms' },
+          { label: 'Privacy', href: '/privacy' },
+          { label: 'Cookie policy', href: '/cookie-policy' },
           { label: 'Contatto GDPR', href: '#' },
         ],
       },
@@ -630,5 +630,24 @@ export const it: Dictionary = {
     ],
     copyright: '© 2026 Minerva SRL. Tutti i diritti riservati.',
     tagline: 'Costruito a Milano · Made in Italy',
+  },
+
+  legal: {
+    backHome: 'Torna alla home',
+    languageNote: '',
+    docs: {
+      terms: {
+        title: 'Termini e condizioni di utilizzo',
+        description: "Termini e condizioni che disciplinano l'accesso e l'utilizzo della piattaforma MINERVA.",
+      },
+      privacy: {
+        title: 'Informativa privacy',
+        description: 'Come MINERVA raccoglie, utilizza, conserva e protegge i dati personali (GDPR).',
+      },
+      'cookie-policy': {
+        title: 'Cookie policy',
+        description: "Informativa sull'uso di cookie e tecnologie di tracciamento sulla piattaforma MINERVA.",
+      },
+    },
   },
 };

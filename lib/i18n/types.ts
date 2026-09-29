@@ -112,6 +112,8 @@ export interface FaqEntry {
   answer: string;
 }
 
+export type LegalSlug = 'terms' | 'privacy' | 'cookie-policy';
+
 /** Locale-dependent copy for one region (structural stats live in lib/data/regions.ts). */
 export interface RegionL10n {
   tagline: string;
@@ -215,5 +217,11 @@ export interface Dictionary {
     columns: FooterColumn[];
     copyright: string;
     tagline: string;
+  };
+  legal: {
+    backHome: string;
+    /** Rendered above the document when non-empty (used on non-Italian locales). */
+    languageNote: string;
+    docs: Record<LegalSlug, { title: string; description: string }>;
   };
 }

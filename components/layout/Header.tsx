@@ -15,7 +15,7 @@ import { THEME_KEY } from '@/lib/theme';
  * persists the choice — and the EN/IT language switch.
  */
 export function Header() {
-  const { dict } = useI18n();
+  const { dict, locale } = useI18n();
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -63,7 +63,8 @@ export function Header() {
 
           <div className="hidden md:flex items-center gap-7 text-sm">
             {dict.header.nav.map((l) => (
-              <a key={l.href} href={l.href} className="text-fg-muted hover:text-fg transition-colors duration-150">
+              // Locale-prefixed so section links also work from subpages (e.g. /en/terms)
+              <a key={l.href} href={`/${locale}${l.href}`} className="text-fg-muted hover:text-fg transition-colors duration-150">
                 {l.label}
               </a>
             ))}
