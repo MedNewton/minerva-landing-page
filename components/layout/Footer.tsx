@@ -43,7 +43,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border text-xs text-fg-subtle leading-relaxed">
+        <div className="mt-12 pt-6 border-t border-border text-xs text-fg-subtle leading-relaxed text-center">
           <p className="font-medium text-fg-muted">{t.company.statement}</p>
           <address className="not-italic mt-1">
             {t.company.name} – {t.company.address}
