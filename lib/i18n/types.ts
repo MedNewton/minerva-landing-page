@@ -215,6 +215,15 @@ export interface Dictionary {
   footer: {
     description: string;
     columns: FooterColumn[];
+    /** Legal publisher block: "Minerva is a digital product of Athena Sas" + registered details. */
+    company: {
+      statement: string;
+      name: string;
+      address: string;
+      vat: string;
+      pecLabel: string;
+      pec: string;
+    };
     copyright: string;
     tagline: string;
   };
