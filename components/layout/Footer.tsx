@@ -43,7 +43,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-fg-subtle">
+        <div className="mt-12 pt-6 border-t border-border text-xs text-fg-subtle leading-relaxed">
+          <p className="font-medium text-fg-muted">{t.company.statement}</p>
+          <address className="not-italic mt-1">
+            {t.company.name} – {t.company.address}
+            <br />
+            {t.company.vat} –{' '}
+            {t.company.pecLabel}:{' '}
+            <a
+              href={`mailto:${t.company.pec}`}
+              className="hover:text-fg transition-colors duration-150"
+            >
+              {t.company.pec}
+            </a>
+          </address>
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-fg-subtle">
           <span>{t.copyright}</span>
           <span>{t.tagline}</span>
         </div>
