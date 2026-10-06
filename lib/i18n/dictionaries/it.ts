@@ -636,7 +636,7 @@ export const it: Dictionary = {
       pecLabel: 'Pec',
       pec: 'athenasas2025@arubapec.it',
     },
-    copyright: '© 2026 Minerva SRL. Tutti i diritti riservati.',
+    copyright: '© 2026 Athena Sas. Tutti i diritti riservati.',
     tagline: 'Costruito a Milano · Made in Italy',
   },
 
