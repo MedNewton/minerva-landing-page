@@ -1,4 +1,5 @@
 import type { RegionSlug } from '@/lib/data/italy-map-paths';
+import type { LogoId } from '@/lib/logos';
 
 export interface NavLink {
   label: string;
@@ -21,7 +22,7 @@ export interface PartnerTile {
 export interface StackCompany {
   title: string;
   subtitle: string;
-  logo: string;
+  logo: LogoId;
 }
 
 /** Sample match shown in the "Client match" scorecard. */
@@ -29,7 +30,7 @@ export interface ClientMatch {
   ticket: string;
   score: number;
   verifiedOn: string;
-  companies: { logo: string; name: string; meta: string }[];
+  companies: { logo: LogoId; name: string; meta: string }[];
   dimensions: { label: string; value: number }[];
 }
 
@@ -121,6 +122,76 @@ export interface RegionL10n {
   districts: { name: string; description: string }[];
 }
 
+/** One of the two ways in, shown side by side in the guide. */
+export interface SignupPathCard {
+  title: string;
+  who: string;
+  needs: string[];
+  after: string[];
+}
+
+/** One pillar of the compatibility score, with its share of the total. */
+export interface MatchPillar {
+  label: string;
+  /** Percentage of the 0–100 score (mirrors PILLAR_WEIGHTS in the app). */
+  weight: number;
+  body: string;
+}
+
+/** Copy for the "How to sign up" guide page. */
+export interface HowToGuide {
+  meta: { title: string; description: string };
+  backHome: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  tocLabel: string;
+  documents: {
+    title: string;
+    intro: string;
+    groups: { title: string; items: string[] }[];
+  };
+  ateco: {
+    title: string;
+    body: string;
+    exampleLabel: string;
+    exampleFrom: string;
+    exampleTo: string;
+    where: string;
+  };
+  quick: {
+    title: string;
+    body: string;
+    caveat: string;
+    link: string;
+  };
+  matching: {
+    title: string;
+    intro: string;
+    pillars: MatchPillar[];
+    note: string;
+  };
+  members: {
+    title: string;
+    body: string;
+    roles: { name: string; body: string }[];
+  };
+  paths: {
+    title: string;
+    intro: string;
+    labels: { who: string; needs: string; after: string };
+    company: SignupPathCard;
+    collaborator: SignupPathCard;
+    videoTitle: string;
+  };
+  cta: {
+    title: string;
+    body: string;
+    primary: string;
+    secondary: string;
+  };
+}
+
 /** Every user-visible string on the landing page, per locale. */
 export interface Dictionary {
   meta: { title: string; description: string };
@@ -137,6 +208,8 @@ export interface Dictionary {
     description: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    /** Link to the "How to sign up" guide (/[lang]/come-iscriversi). */
+    ctaHowTo: string;
   };
   cards: {
     supplier: { title: string; description: string; chips: string[]; axisY: string; axisX: string };
@@ -227,6 +300,7 @@ export interface Dictionary {
     copyright: string;
     tagline: string;
   };
+  howTo: HowToGuide;
   legal: {
     backHome: string;
     /** Rendered above the document when non-empty (used on non-Italian locales). */

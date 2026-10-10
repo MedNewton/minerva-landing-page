@@ -27,6 +27,7 @@ export const it: Dictionary = {
       'MINERVA connette le aziende sulla base della compatibilità reale tra valori, competenze e obiettivi di crescita. Scopri opportunità che non troveresti da solo.',
     ctaPrimary: 'Esplora la piattaforma',
     ctaSecondary: 'Scopri i piani',
+    ctaHowTo: 'Come iscriversi',
   },
 
   cards: {
@@ -46,8 +47,8 @@ export const it: Dictionary = {
         score: 87,
         verifiedOn: '21 mag 2026',
         companies: [
-          { logo: '/assets/icons/lavazza.svg', name: 'Lavazza', meta: 'Caffè e bevande · Torino' },
-          { logo: '/assets/icons/sacmi.svg', name: 'SACMI', meta: 'Macchine per il packaging · Imola' },
+          { logo: 'mpm', name: 'MPM', meta: 'Servizi ambientali · Sicurezza stradale' },
+          { logo: 'cosmopolitan', name: 'Cosmopolitan Business Hotel', meta: 'Ospitalità · Business hotel' },
         ],
         dimensions: [
           { label: 'Cultura operativa', value: 82 },
@@ -123,11 +124,8 @@ export const it: Dictionary = {
     progressLabel: 'Avanzamento della sezione',
     stepLabel: 'Passaggio {n} di {total}',
     stackCompanies: [
-      { title: 'Barilla', subtitle: 'Produzione alimentare · Parma', logo: '/assets/icons/barilla.svg' },
-      { title: 'Brembo', subtitle: 'Componenti automotive · Bergamo', logo: '/assets/icons/brembo.svg' },
-      { title: 'Reply', subtitle: 'Consulenza tecnologica · Torino', logo: '/assets/icons/reply.svg' },
-      { title: "De'Longhi", subtitle: 'Elettrodomestici · Treviso', logo: '/assets/icons/delonghi.svg' },
-      { title: 'IMA Group', subtitle: 'Packaging · Bologna', logo: '/assets/icons/ima.svg' },
+      { title: 'MPM', subtitle: 'Servizi ambientali · Sicurezza stradale', logo: 'mpm' },
+      { title: 'Cosmopolitan', subtitle: 'Ospitalità · Business hotel', logo: 'cosmopolitan' },
     ],
     counterLabel: 'Candidate al matching',
     verificationCards: [
@@ -638,6 +636,149 @@ export const it: Dictionary = {
     },
     copyright: '© 2026 Athena Sas. Tutti i diritti riservati.',
     tagline: 'Costruito a Milano · Made in Italy',
+  },
+
+  howTo: {
+    meta: {
+      title: 'Come iscriversi a MINERVA',
+      description:
+        "Cosa serve per registrarsi su MINERVA, come inserire il codice ATECO, come funziona il matching e la differenza tra registrare un'azienda e unirsi come collaboratore.",
+    },
+    backHome: 'Torna alla home',
+    eyebrow: "Guida all'iscrizione",
+    title: 'Come iscriversi a MINERVA',
+    intro:
+      'Cosa ti serve, cosa puoi lasciare per dopo e come usiamo i tuoi dati per proporti le aziende giuste. Se hai la visura camerale a portata di mano, bastano pochi minuti.',
+    tocLabel: 'In questa pagina',
+    documents: {
+      title: 'Cosa ti serve',
+      intro:
+        "L'unico documento da caricare è la visura camerale, e solo se registri una nuova azienda. Il resto sono dati che conosci già.",
+      groups: [
+        {
+          title: "Per creare l'account",
+          items: [
+            'Un indirizzo e-mail e una password di almeno 8 caratteri, oppure un account Google',
+            'Nome e cognome. La foto profilo è facoltativa',
+            "L'accettazione dei Termini e dell'Informativa privacy",
+          ],
+        },
+        {
+          title: 'Per registrare una nuova azienda',
+          items: [
+            'Visura camerale in PDF, massimo 10 MB. Resta interna e non compare sul profilo',
+            "Nome dell'azienda, regione e una breve descrizione",
+            'Tipo (prodotto o servizio) e categoria',
+            "Fatturato annuo esatto in euro, con l'anno di riferimento dell'ultimo bilancio approvato. Sul profilo mostriamo solo la fascia",
+            'La mission e almeno un valore aziendale',
+            'Cosa offri e a chi ti rivolgi: aziende, privati o entrambi',
+            'Almeno un obiettivo: cosa cerchi su MINERVA',
+            'Nome, cognome e ruolo della persona di contatto',
+          ],
+        },
+        {
+          title: 'Facoltativi, anche in un secondo momento',
+          items: [
+            'Logo aziendale e partita IVA',
+            'Codice ATECO e anno di fondazione',
+            'Foto, sito web, contatti e social',
+          ],
+        },
+      ],
+    },
+    ateco: {
+      title: 'Codice ATECO: solo numeri',
+      body: 'Scrivi il codice senza punti. Se lo incolli con i punti, il campo li toglie da solo.',
+      exampleLabel: 'Esempio',
+      exampleFrom: '62.01.00',
+      exampleTo: '620100',
+      where:
+        'Il codice è riportato nella visura camerale. Il campo si trova nella sezione Generale del profilo aziendale ed è facoltativo.',
+    },
+    quick: {
+      title: 'Iscrizione veloce',
+      body: "I campi di testo, come descrizione, mission e offerta, accettano anche poche lettere. Se vuoi entrare subito, scrivi l'essenziale e vai avanti.",
+      caveat:
+        'Poi torna a completare il profilo. Un testo di poche lettere non dice nulla al matching e abbassa la compatibilità proprio su quelle voci. Lo stato di completamento è sempre visibile nella dashboard.',
+      link: 'Completa il profilo',
+    },
+    matching: {
+      title: 'Come scegliamo i match',
+      intro:
+        'Per ogni coppia di aziende calcoliamo un punteggio di compatibilità da 0 a 100, unendo quattro aree. Ogni campo che compili alimenta almeno una di queste aree.',
+      pillars: [
+        {
+          label: 'Affinità di business',
+          weight: 30,
+          body: "Quanto la tua offerta risponde a ciò che l'altra azienda cerca, e viceversa: obiettivi, settore, dimensione, regione e descrizione dell'offerta.",
+        },
+        {
+          label: 'Mercato',
+          weight: 25,
+          body: 'Se operate in mercati vicini: settori serviti, tipo di clienti, regioni e modello (prodotto o servizio, aziende o privati).',
+        },
+        {
+          label: 'Valori',
+          weight: 25,
+          body: 'Se lavorate in modo simile: valori aziendali, sostenibilità, mission e vision, certificazioni e premi.',
+        },
+        {
+          label: 'Organizzazione',
+          weight: 20,
+          body: 'Se siete compatibili per dimensione e struttura: numero di dipendenti, fascia di fatturato e reparti.',
+        },
+      ],
+      note: "Un dato mancante non ti penalizza: quella voce semplicemente non entra nel calcolo. Il settore viene dalla categoria che scegli, non dal codice ATECO.",
+    },
+    members: {
+      title: 'Fino a 50 persone per azienda',
+      body: "Ogni azienda può avere fino a 50 membri. Chi registra l'azienda ne è il titolare. Una persona può far parte di più aziende e passare dall'una all'altra.",
+      roles: [
+        { name: 'Titolare', body: "Ha creato l'azienda e può cederne la titolarità" },
+        { name: 'Amministratore', body: 'Approva le richieste di accesso e invita i colleghi via e-mail' },
+        { name: 'Membro', body: "Agisce per conto dell'azienda in Esplora, Match e Calendario" },
+      ],
+    },
+    paths: {
+      title: 'Azienda o collaboratore?',
+      intro: "Ci sono due modi per entrare. Dipende se la tua azienda è già su MINERVA.",
+      labels: { who: 'Chi la fa', needs: 'Cosa serve', after: 'Cosa puoi fare dopo' },
+      company: {
+        title: "Registri l'azienda",
+        who: "Il titolare o chi può rappresentare l'azienda, quando l'azienda non è ancora su MINERVA. Chi la crea ne diventa il titolare.",
+        needs: [
+          'Un account personale',
+          'La visura camerale in PDF',
+          "Fatturato annuo e i dati dell'azienda elencati sopra",
+        ],
+        after: [
+          'Completi il profilo e ricevi i primi match',
+          'Approvi chi chiede di entrare e inviti i colleghi',
+          'Nomini amministratori e, se serve, cedi la titolarità',
+        ],
+      },
+      collaborator: {
+        title: 'Ti unisci come collaboratore',
+        who: "Chi lavora in un'azienda che è già su MINERVA.",
+        needs: [
+          'Un account personale: e-mail e password, oppure Google',
+          'Nome e cognome',
+          "Il nome dell'azienda da cercare, oppure l'invito ricevuto via e-mail",
+        ],
+        after: [
+          'Un titolare o un amministratore approva la richiesta. Con un invito entri subito',
+          "Esplori le aziende compatibili, ti colleghi e fissi incontri a nome dell'azienda",
+          'Aggiorni il profilo aziendale insieme ai colleghi',
+        ],
+      },
+      videoTitle: "Video: registrare un'azienda o unirsi come collaboratore",
+    },
+    cta: {
+      title: 'Pronto a iniziare?',
+      body: 'Crea il tuo account. Potrai unirti alla tua azienda o registrarne una nuova subito dopo.',
+      primary: 'Crea il tuo account',
+      secondary: 'Hai già un account? Accedi',
+    },
   },
 
   legal: {

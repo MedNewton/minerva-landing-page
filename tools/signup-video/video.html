@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Come iscriversi a Minerva</title>
+<style>
+/* Hallmark · video explainer · genre: modern-minimal · theme: landing tokens (studied from minerva-landing-page) */
+@font-face { font-family: 'GSF'; src: url('GoogleSansFlex-latin.woff2') format('woff2'); font-weight: 300 800; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+2215; }
+@font-face { font-family: 'GSF'; src: url('GoogleSansFlex-latin-ext.woff2') format('woff2'); font-weight: 300 800; unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+:root {
+  --bg: #F8FAFC; --surface: #FFFFFF; --surface-alt: #F1F4F8;
+  --fg: #2A303B; --fg-muted: #475569; --fg-subtle: #64748B;
+  --accent: #0369A1; --accent-strong: #075985; --accent-tint: rgba(3,105,161,0.10);
+  --border: #E2E8F0; --border-strong: #CBD5E1; --success: #15803D; --success-tint: rgba(21,128,61,0.10);
+  --mesh-1: rgba(3,105,161,0.20); --mesh-2: rgba(7,89,133,0.14);
+  --font: 'GSF', system-ui, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+body { font-family: var(--font); color: var(--fg); -webkit-font-smoothing: antialiased; position: relative; }
+.glow { position: absolute; inset: 0; background:
+  radial-gradient(40% 55% at 6% 100%, var(--mesh-1), transparent 70%),
+  radial-gradient(45% 60% at 96% 100%, var(--mesh-2), transparent 70%); }
+.brand { position: absolute; top: 56px; left: 96px; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+.brand img { width: 44px; height: 44px; border-radius: 10px; }
+.progress { position: absolute; left: 96px; right: 96px; bottom: 56px; height: 4px; border-radius: 4px; background: var(--border); overflow: hidden; }
+.progress > i { display: block; height: 100%; background: var(--accent); width: 0; }
+.scene { position: absolute; inset: 0; opacity: 0; }
+.cols { position: absolute; top: 170px; left: 96px; right: 96px; bottom: 120px; display: grid; grid-template-columns: 640px 1fr; gap: 96px; align-items: center; }
+.kicker { font-size: 26px; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
+h1 { font-size: 104px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 650; }
+h2 { font-size: 72px; line-height: 1.06; letter-spacing: -0.03em; font-weight: 650; }
+.lead { font-size: 34px; line-height: 1.4; color: var(--fg-muted); margin-top: 28px; max-width: 30ch; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px 44px; box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 18px 48px -24px rgba(15,23,42,0.18); }
+.field { margin-bottom: 26px; }
+.field:last-child { margin-bottom: 0; }
+.label { font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+.hint { font-size: 19px; color: var(--fg-subtle); margin-top: 8px; }
+.input { height: 66px; border: 1.5px solid var(--border-strong); border-radius: 14px; padding: 0 22px; display: flex; align-items: center; font-size: 24px; color: var(--fg); background: var(--surface); }
+.input.placeholder { color: var(--fg-subtle); }
+.input .caret { display: inline-block; width: 2px; height: 30px; background: var(--accent); margin-left: 2px; }
+.row { display: flex; gap: 16px; }
+.btn { height: 70px; border-radius: 999px; background: var(--fg); color: #fff; display: inline-flex; align-items: center; justify-content: center; padding: 0 44px; font-size: 25px; font-weight: 600; }
+.btn.outline { background: var(--surface); color: var(--fg); border: 1.5px solid var(--border-strong); }
+.btn.block { width: 100%; }
+.check { display: flex; align-items: center; gap: 14px; font-size: 22px; color: var(--fg-muted); }
+.box { width: 30px; height: 30px; border-radius: 8px; border: 2px solid var(--border-strong); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.box.on { background: var(--accent); border-color: var(--accent); }
+.otp { display: flex; gap: 14px; }
+.otp span { width: 74px; height: 86px; border: 1.5px solid var(--border-strong); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 600; font-family: var(--mono); }
+.sep { display: flex; align-items: center; gap: 16px; color: var(--fg-subtle); font-size: 20px; margin: 22px 0; }
+.sep::before, .sep::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.stack > * + * { margin-top: 22px; }
+.fork { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.fork .card { padding: 40px; }
+.tag { display: inline-flex; align-items: center; height: 42px; padding: 0 18px; border-radius: 999px; font-size: 21px; font-weight: 600; background: var(--accent-tint); color: var(--accent-strong); margin-bottom: 22px; }
+.tag.green { background: var(--success-tint); color: var(--success); }
+.fork h3 { font-size: 40px; letter-spacing: -0.02em; font-weight: 650; margin-bottom: 14px; }
+.fork p { font-size: 25px; line-height: 1.45; color: var(--fg-muted); }
+.result { display: flex; align-items: center; gap: 18px; padding: 18px 20px; border-radius: 16px; background: var(--surface-alt); }
+.avatar { width: 56px; height: 56px; border-radius: 12px; background: #DCE7F0; color: var(--accent-strong); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; flex: none; }
+.result b { display: block; font-size: 24px; font-weight: 600; }
+.result small { display: block; font-size: 19px; color: var(--fg-subtle); margin-top: 4px; }
+.notice { display: flex; gap: 18px; align-items: flex-start; padding: 24px 26px; border-radius: 18px; font-size: 23px; line-height: 1.45; }
+.notice.wait { background: var(--accent-tint); color: var(--accent-strong); }
+.notice.ok { background: var(--success-tint); color: var(--success); }
+.dot { width: 14px; height: 14px; border-radius: 50%; background: currentColor; flex: none; margin-top: 10px; }
+.stepper { display: flex; align-items: center; gap: 10px; margin-bottom: 34px; }
+.step { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; color: var(--fg-subtle); }
+.step i { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--border-strong); display: inline-flex; align-items: center; justify-content: center; font-style: normal; font-size: 18px; }
+.step.done i { background: var(--accent); border-color: var(--accent); color: #fff; }
+.step.active { color: var(--fg); }
+.step.active i { border-color: var(--fg); background: var(--fg); color: #fff; }
+.bar { flex: 1; height: 2px; background: var(--border-strong); min-width: 18px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+.drop { border: 2px dashed var(--border-strong); border-radius: 16px; height: 96px; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 22px; color: var(--fg-muted); }
+.drop.done { border-style: solid; border-color: var(--success); color: var(--success); background: var(--success-tint); }
+.meter { height: 16px; border-radius: 16px; background: var(--border); overflow: hidden; }
+.meter > i { display: block; height: 100%; background: var(--accent); border-radius: 16px; }
+.big { font-family: var(--mono); font-size: 64px; font-weight: 600; letter-spacing: -0.01em; }
+.strike { color: var(--fg-subtle); text-decoration: line-through; text-decoration-thickness: 3px; }
+.center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.center .lead { max-width: 36ch; margin-left: auto; margin-right: auto; }
+.url { margin-top: 34px; font-size: 30px; color: var(--accent); font-weight: 600; }
+.tiny { font-size: 22px; color: var(--fg-subtle); margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="brand"><img src="../../public/assets/logo-light.svg" alt="" /> Minerva</div>
+<div class="progress"><i id="prog"></i></div>
+<div id="root"></div>
+
+<script>
+const COPY = {
+  it: {
+    title: 'Come iscriversi a MINERVA',
+    subtitle: 'Due strade: registri la tua azienda, oppure ti unisci ai colleghi che sono già sulla piattaforma.',
+    s1k: 'Passo 1', s1h: 'Crea il tuo account', s1p: 'E-mail e password, oppure Google. Poi il codice che ti arriva via e-mail, nome e cognome.',
+    email: 'E-mail', emailVal: 'giulia.rossi@azienda.it', pwd: 'Password', pwdHint: 'Almeno 8 caratteri', google: 'oppure continua con Google', terms: 'Accetto i Termini e l’Informativa privacy', create: 'Crea account',
+    code: 'Codice di verifica', codeHint: 'Lo trovi nell’e-mail che ti abbiamo appena mandato', name: 'Nome e cognome', nameVal: 'Giulia Rossi',
+    s2k: 'Passo 2', s2h: 'La tua azienda è già su MINERVA?',
+    yesTag: 'Sì', yesH: 'Ti unisci come collaboratore', yesP: 'Cerchi l’azienda e chiedi di entrare. Oppure accetti l’invito ricevuto via e-mail.',
+    noTag: 'No', noH: 'Registri l’azienda', noP: 'La crei tu e ne diventi il titolare. Ti serve la visura camerale.',
+    s3k: 'Collaboratore', s3h: 'Cerca l’azienda e chiedi di entrare', s3p: 'Un titolare o un amministratore approva la richiesta. Con un invito via e-mail entri subito.',
+    company: 'Per quale azienda lavori?', search: 'Aurora', resName: 'Aurora Digital SRL', resMeta: 'IT e software · Lombardia', resCount: '6 membri',
+    request: 'Invia richiesta', pending: 'Richiesta inviata. Ti scriviamo appena un titolare o un amministratore ti approva.', approved: 'Approvata: ora agisci per conto dell’azienda.',
+    s4k: 'Nuova azienda', s4h: 'Registra l’azienda in cinque passi', s4p: 'Chi la crea ne diventa il titolare: approva i colleghi e li invita, fino a 50 persone.',
+    steps: ['Azienda', 'Cultura', 'Offerta', 'Obiettivi', 'Contatti'],
+    cName: 'Nome dell’azienda', cNameVal: 'Officine Rossi SRL', cType: 'Tipo e categoria', cTypeVal: 'Prodotto · Meccanica', cRev: 'Fatturato annuo (EUR)', cRevVal: '€ 2.400.000', cYear: 'Anno', cYearVal: '2025',
+    visura: 'Visura camerale', visuraEmpty: 'Carica il PDF (max 10 MB)', visuraDone: 'visura-officine-rossi.pdf', visuraHint: 'Resta interna: non compare sul profilo.',
+    stepNotes: ['Mission e valori aziendali', 'Cosa offri e a chi ti rivolgi', 'Cosa cerchi su MINERVA', 'Persona di contatto'],
+    s5k: 'Passo 3', s5h: 'Completa il profilo', s5p: 'Puoi entrare con testi brevi, ma il matching ragiona sui tuoi dati: più il profilo è completo, migliori sono i match.',
+    complete: 'Profilo completato', ateco: 'Codice ATECO: solo numeri', atecoHint: 'Se lo incolli con i punti, li togliamo noi.',
+    endH: 'Crea il tuo account', endP: 'Ti servono pochi minuti. La visura camerale solo se registri una nuova azienda.', endUrl: 'app.minerva-app.website', endGuide: 'Guida completa: minerva-app.website/it/come-iscriversi',
+  },
+  en: {
+    title: 'How to sign up for MINERVA',
+    subtitle: 'Two ways in: register your company, or join colleagues who are already on the platform.',
+    s1k: 'Step 1', s1h: 'Create your account', s1p: 'Email and password, or Google. Then the code we email you, and your name.',
+    email: 'Email', emailVal: 'giulia.rossi@company.it', pwd: 'Password', pwdHint: 'At least 8 characters', google: 'or continue with Google', terms: 'I accept the Terms and the Privacy Policy', create: 'Create account',
+    code: 'Verification code', codeHint: 'You will find it in the email we just sent you', name: 'First and last name', nameVal: 'Giulia Rossi',
+    s2k: 'Step 2', s2h: 'Is your company already on MINERVA?',
+    yesTag: 'Yes', yesH: 'Join as a collaborator', yesP: 'Search for your company and ask to join. Or accept the invitation you received by email.',
+    noTag: 'No', noH: 'Register the company', noP: 'You create it and become its owner. You need the Visura camerale.',
+    s3k: 'Collaborator', s3h: 'Find your company and ask to join', s3p: 'An owner or admin approves your request. With an email invitation you are in straight away.',
+    company: 'Which company do you work for?', search: 'Aurora', resName: 'Aurora Digital SRL', resMeta: 'IT & software · Lombardy', resCount: '6 members',
+    request: 'Send request', pending: 'Request sent. We will email you as soon as an owner or admin approves you.', approved: 'Approved: you now act on behalf of the company.',
+    s4k: 'New company', s4h: 'Register the company in five steps', s4p: 'Whoever creates it becomes the owner: they approve and invite colleagues, up to 50 people.',
+    steps: ['Company', 'Culture', 'Offer', 'Goals', 'Contacts'],
+    cName: 'Company name', cNameVal: 'Officine Rossi SRL', cType: 'Type and category', cTypeVal: 'Product · Machinery', cRev: 'Annual revenue (EUR)', cRevVal: '€ 2,400,000', cYear: 'Year', cYearVal: '2025',
+    visura: 'Visura camerale', visuraEmpty: 'Upload the PDF (max 10 MB)', visuraDone: 'visura-officine-rossi.pdf', visuraHint: 'It stays internal: never shown on your profile.',
+    stepNotes: ['Mission and company values', 'What you offer and who you serve', 'What you are looking for on MINERVA', 'Contact person'],
+    s5k: 'Step 3', s5h: 'Complete your profile', s5p: 'Short answers get you in, but matching works on your data: the more complete your profile, the better your matches.',
+    complete: 'Profile complete', ateco: 'ATECO code: digits only', atecoHint: 'Paste it with dots and we remove them.',
+    endH: 'Create your account', endP: 'It takes a few minutes. The Visura camerale only if you register a new company.', endUrl: 'app.minerva-app.website', endGuide: 'Full guide: minerva-app.website/en/come-iscriversi',
+  },
+};
+const lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'it';
+const c = COPY[lang];
+document.documentElement.lang = lang;
+
+// Scene timings (seconds). Total runtime = last end.
+const SCENES = [
+  { id: 'intro', start: 0, end: 5 },
+  { id: 'account', start: 5, end: 15 },
+  { id: 'fork', start: 15, end: 21.5 },
+  { id: 'join', start: 21.5, end: 32 },
+  { id: 'company', start: 32, end: 45 },
+  { id: 'profile', start: 45, end: 52 },
+  { id: 'end', start: 52, end: 57 },
+];
+const DURATION = 57;
+
+const tick = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const okIcon = (col = 'currentColor') => `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.8 2.8L16.2 9.5"/></svg>`;
+const fileIcon = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg>';
+const searchIcon = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
+
+// data-in / data-out are seconds relative to the scene start.
+document.getElementById('root').innerHTML = `
+<section class="scene" data-scene="intro">
+  <div class="center">
+    <div class="kicker" data-in="0.2">${lang === 'it' ? 'Guida all’iscrizione' : 'Sign-up guide'}</div>
+    <h1 data-in="0.4" style="max-width:15ch">${c.title}</h1>
+    <p class="lead" data-in="0.9">${c.subtitle}</p>
+  </div>
+</section>
+
+<section class="scene" data-scene="account">
+  <div class="cols">
+    <div>
+      <div class="kicker" data-in="0.1">${c.s1k}</div>
+      <h2 data-in="0.25">${c.s1h}</h2>
+      <p class="lead" data-in="0.6">${c.s1p}</p>
+    </div>
+    <div style="position:relative;height:720px">
+      <div class="card" data-in="0.5" data-out="5.4" style="position:absolute;inset:0 0 auto 0">
+        <div class="field"><div class="label">${c.email}</div><div class="input" data-type="type" data-text="${c.emailVal}" data-from="1.0" data-to="2.4"></div></div>
+        <div class="field"><div class="label">${c.pwd}</div><div class="input" data-type="type" data-text="••••••••••" data-from="2.5" data-to="3.3"></div><div class="hint">${c.pwdHint}</div></div>
+        <div class="check field"><span class="box" data-type="toggle" data-at="3.6">${tick}</span>${c.terms}</div>
+        <div data-type="press" data-at="4.4"><span class="btn block">${c.create}</span></div>
+        <div class="sep">${c.google}</div>
+        <div><span class="btn outline block">Google</span></div>
+      </div>
+      <div class="card" data-in="5.7" style="position:absolute;inset:0 0 auto 0">
+        <div class="field"><div class="label">${c.code}</div>
+          <div class="otp" data-type="otp" data-text="482915" data-from="6.1" data-to="7.3"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="hint">${c.codeHint}</div></div>
+        <div class="field" data-in="7.6"><div class="label">${c.name}</div><div class="input" data-type="type" data-text="${c.nameVal}" data-from="7.9" data-to="8.9"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-scene="fork">
+  <div style="position:absolute;top:140px;bottom:120px;left:96px;right:96px;display:flex;flex-direction:column;justify-content:center">
+    <div class="kicker" data-in="0.1">${c.s2k}</div>
+    <h2 data-in="0.25" style="margin-bottom:56px">${c.s2h}</h2>
+    <div class="fork">
+      <div class="card" data-in="0.9"><span class="tag green">${c.yesTag}</span><h3>${c.yesH}</h3><p>${c.yesP}</p></div>
+      <div class="card" data-in="1.3"><span class="tag">${c.noTag}</span><h3>${c.noH}</h3><p>${c.noP}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-scene="join">
+  <div class="cols">
+    <div>
+      <div class="kicker" data-in="0.1"><span class="tag green" style="margin:0">${c.s3k}</span></div>
+      <h2 data-in="0.25">${c.s3h}</h2>
+      <p class="lead" data-in="0.6">${c.s3p}</p>
+    </div>
+    <div class="card stack" data-in="0.5">
+      <div><div class="label">${c.company}</div>
+        <div class="input" style="gap:14px">${searchIcon}<span data-type="type" data-text="${c.search}" data-from="1.2" data-to="2.0"></span></div></div>
+      <div class="result" data-in="2.3"><span class="avatar">A</span><div style="flex:1"><b>${c.resName}</b><small>${c.resMeta}</small></div><small style="font-size:19px;color:var(--fg-subtle)">${c.resCount}</small></div>
+      <div data-in="2.8" data-type="press" data-at="3.8"><span class="btn block">${c.request}</span></div>
+      <div style="display:grid">
+        <div class="notice wait" data-in="4.3" data-out="7.4" style="grid-area:1/1"><span class="dot"></span><span>${c.pending}</span></div>
+        <div class="notice ok" data-in="7.6" style="grid-area:1/1;align-self:start">${okIcon()}<span>${c.approved}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-scene="company">
+  <div class="cols">
+    <div>
+      <div class="kicker" data-in="0.1"><span class="tag" style="margin:0">${c.s4k}</span></div>
+      <h2 data-in="0.25">${c.s4h}</h2>
+      <p class="lead" data-in="0.6">${c.s4p}</p>
+    </div>
+    <div class="card" data-in="0.5">
+      <div class="stepper" data-type="stepper" data-times="0,7.2,8.4,9.6,10.8,12.0">
+        ${c.steps.map((s, i) => `${i ? '<span class="bar"></span>' : ''}<span class="step"><i>${i + 1}</i>${s}</span>`).join('')}
+      </div>
+      <div style="display:grid">
+      <div data-out="7.1" style="grid-area:1/1">
+        <div class="field"><div class="label">${c.cName}</div><div class="input" data-type="type" data-text="${c.cNameVal}" data-from="1.2" data-to="2.2"></div></div>
+        <div class="grid2">
+          <div class="field"><div class="label">${c.cType}</div><div class="input" data-type="type" data-text="${c.cTypeVal}" data-from="2.4" data-to="3.1"></div></div>
+          <div class="field"><div class="label">${c.cRev}</div><div class="row"><div class="input" style="flex:1" data-type="type" data-text="${c.cRevVal}" data-from="3.3" data-to="4.0"></div><div class="input" style="width:118px" data-type="type" data-text="${c.cYearVal}" data-from="4.1" data-to="4.5"></div></div></div>
+        </div>
+        <div class="field"><div class="label">${c.visura}</div>
+          <div class="drop" data-type="drop" data-at="5.4"><span class="ico">${fileIcon}</span><span class="txt" data-empty="${c.visuraEmpty}" data-done="${c.visuraDone}">${c.visuraEmpty}</span></div>
+          <div class="hint">${c.visuraHint}</div></div>
+      </div>
+      <div class="stack" data-in="7.3" style="grid-area:1/1;align-self:start">
+        ${c.stepNotes.map((n, i) => `<div class="result" data-in="${7.4 + i * 1.2}"><span class="avatar">${i + 2}</span><div><b>${c.steps[i + 1]}</b><small>${n}</small></div></div>`).join('')}
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-scene="profile">
+  <div class="cols">
+    <div>
+      <div class="kicker" data-in="0.1">${c.s5k}</div>
+      <h2 data-in="0.25">${c.s5h}</h2>
+      <p class="lead" data-in="0.6">${c.s5p}</p>
+    </div>
+    <div class="stack">
+      <div class="card" data-in="0.6">
+        <div class="row" style="justify-content:space-between;align-items:baseline;margin-bottom:22px"><div class="label" style="margin:0">${c.complete}</div><div class="big" style="font-size:44px" data-type="count" data-a="35" data-b="100" data-from="1.2" data-to="3.6">35%</div></div>
+        <div class="meter"><i data-type="meter" data-a="35" data-b="100" data-from="1.2" data-to="3.6"></i></div>
+      </div>
+      <div class="card" data-in="2.2">
+        <div class="label">${c.ateco}</div>
+        <div class="row" style="align-items:center;gap:28px;margin:10px 0 6px"><span class="big strike">62.01.00</span><span style="font-size:48px;color:var(--accent)">→</span><span class="big" data-in="3.0">620100</span></div>
+        <div class="hint">${c.atecoHint}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-scene="end">
+  <div class="center">
+    <img src="../../public/assets/logo-light.svg" alt="" data-in="0.1" style="width:96px;height:96px;border-radius:22px;margin-bottom:36px" />
+    <h1 data-in="0.3">${c.endH}</h1>
+    <p class="lead" data-in="0.7">${c.endP}</p>
+    <div class="url" data-in="1.1">${c.endUrl}</div>
+    <div class="tiny" data-in="1.4">${c.endGuide}</div>
+  </div>
+</section>`;
+
+// ---------- deterministic renderer ----------
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+const FADE = 0.45;
+
+function render(t) {
+  document.getElementById('prog').style.width = `${clamp(t / DURATION) * 100}%`;
+  for (const s of SCENES) {
+    const el = document.querySelector(`[data-scene="${s.id}"]`);
+    const local = t - s.start;
+    const len = s.end - s.start;
+    const vis = clamp(local / 0.35) * (1 - clamp((local - (len - 0.35)) / 0.35));
+    el.style.opacity = vis;
+    el.style.visibility = vis > 0 ? 'visible' : 'hidden';
+    if (vis === 0) continue;
+
+    el.querySelectorAll('[data-in],[data-out]').forEach((n) => {
+      const tin = n.dataset.in !== undefined ? +n.dataset.in : -1;
+      const tout = n.dataset.out !== undefined ? +n.dataset.out : 1e9;
+      const pin = easeOut(clamp((local - tin) / FADE));
+      const pout = clamp((local - tout) / 0.3);
+      n.style.opacity = pin * (1 - pout);
+      n.style.transform = `translateY(${(1 - pin) * 28}px)`;
+    });
+
+    el.querySelectorAll('[data-type]').forEach((n) => {
+      const d = n.dataset;
+      switch (d.type) {
+        case 'type': {
+          const p = clamp((local - +d.from) / (+d.to - +d.from));
+          const k = Math.round(p * d.text.length);
+          const typing = local >= +d.from - 0.2 && local <= +d.to + 0.6;
+          n.innerHTML = k === 0 && !typing ? '' : d.text.slice(0, k) + (typing ? '<span class="caret"></span>' : '');
+          break;
+        }
+        case 'otp': {
+          const p = clamp((local - +d.from) / (+d.to - +d.from));
+          const k = Math.round(p * d.text.length);
+          [...n.children].forEach((sp, i) => {
+            sp.textContent = i < k ? d.text[i] : '';
+            sp.style.borderColor = i === k && p < 1 ? 'var(--accent)' : '';
+          });
+          break;
+        }
+        case 'toggle':
+          n.classList.toggle('on', local >= +d.at);
+          n.firstElementChild.style.opacity = local >= +d.at ? 1 : 0;
+          break;
+        case 'press': {
+          const x = local - +d.at;
+          const s = x > 0 && x < 0.3 ? 1 - 0.05 * Math.sin((x / 0.3) * Math.PI) : 1;
+          const base = d.in !== undefined ? n.style.transform : '';
+          n.style.transform = `${base} scale(${s})`;
+          break;
+        }
+        case 'drop': {
+          const done = local >= +d.at;
+          n.classList.toggle('done', done);
+          const txt = n.querySelector('.txt');
+          txt.textContent = done ? txt.dataset.done : txt.dataset.empty;
+          break;
+        }
+        case 'stepper': {
+          const times = d.times.split(',').map(Number);
+          let active = 0;
+          times.forEach((tt, i) => { if (local >= tt) active = i; });
+          [...n.querySelectorAll('.step')].forEach((st, i) => {
+            st.classList.toggle('done', i < active);
+            st.classList.toggle('active', i === active);
+            st.querySelector('i').innerHTML = i < active ? tick : String(i + 1);
+          });
+          break;
+        }
+        case 'meter':
+        case 'count': {
+          const p = easeOut(clamp((local - +d.from) / (+d.to - +d.from)));
+          const v = Math.round(+d.a + (+d.b - +d.a) * p);
+          if (d.type === 'meter') n.style.width = `${v}%`;
+          else n.textContent = `${v}%`;
+          break;
+        }
+      }
+    });
+  }
+}
+window.render = render;
+window.DURATION = DURATION;
+render(+(new URLSearchParams(location.search).get('t') ?? 0));
+</script>
+</body>
+</html>
