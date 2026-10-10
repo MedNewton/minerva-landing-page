@@ -27,6 +27,7 @@ export const en: Dictionary = {
       "MINERVA connects companies based on real compatibility across values, capabilities, and growth goals. Discover opportunities you wouldn't find on your own.",
     ctaPrimary: 'Explore platform',
     ctaSecondary: 'View plans',
+    ctaHowTo: 'How to sign up',
   },
 
   cards: {
@@ -635,6 +636,141 @@ export const en: Dictionary = {
     },
     copyright: '© 2026 Athena Sas. All rights reserved.',
     tagline: 'Built in Milano · Made in Italy',
+  },
+
+  howTo: {
+    meta: {
+      title: 'How to sign up for MINERVA',
+      description:
+        'What you need to register on MINERVA, how to enter your ATECO code, how matching works, and the difference between registering a company and joining as a collaborator.',
+    },
+    backHome: 'Back to home',
+    eyebrow: 'Sign-up guide',
+    title: 'How to sign up for MINERVA',
+    intro:
+      'What you need, what can wait, and how we use your data to suggest the right companies. With your Visura camerale at hand, it takes a few minutes.',
+    tocLabel: 'On this page',
+    documents: {
+      title: 'What you need',
+      intro:
+        'The only document to upload is the Visura camerale (Chamber of Commerce extract), and only when you register a new company. Everything else is information you already know.',
+      groups: [
+        {
+          title: 'To create your account',
+          items: [
+            'An email address and a password of at least 8 characters, or a Google account',
+            'First and last name. A profile photo is optional',
+            'Acceptance of the Terms and the Privacy Policy',
+          ],
+        },
+        {
+          title: 'To register a new company',
+          items: [
+            'Visura camerale as a PDF, up to 10 MB. It stays internal and never appears on your profile',
+            'Company name, region and a short description',
+            'Type (product or service) and category',
+            'Exact annual revenue in euros, with the year of the last approved financial statement. Profiles only show the revenue band',
+            'Your mission and at least one company value',
+            'What you offer and who you serve: businesses, consumers or both',
+            'At least one goal: what you are looking for on MINERVA',
+            'First name, last name and role of the contact person',
+          ],
+        },
+        {
+          title: 'Optional, also later',
+          items: ['Company logo and VAT number', 'ATECO code and founding year', 'Photos, website, contacts and social links'],
+        },
+      ],
+    },
+    ateco: {
+      title: 'ATECO code: digits only',
+      body: 'Type the code without dots. If you paste it with dots, the field removes them for you.',
+      exampleLabel: 'Example',
+      exampleFrom: '62.01.00',
+      exampleTo: '620100',
+      where:
+        'You will find the code on your Visura camerale. The field is in the General section of the company profile, and it is optional.',
+    },
+    quick: {
+      title: 'Quick sign-up',
+      body: 'Text fields such as description, mission and offering accept just a few letters. If you want to get in right away, write the essentials and move on.',
+      caveat:
+        'Then come back and complete your profile. A few letters tell the matching nothing and lower your compatibility on exactly those items. Your completion status is always visible on the dashboard.',
+      link: 'Complete your profile',
+    },
+    matching: {
+      title: 'How we pick your matches',
+      intro:
+        'For every pair of companies we compute a compatibility score from 0 to 100 that combines four areas. Every field you fill in feeds at least one of them.',
+      pillars: [
+        {
+          label: 'Business fit',
+          weight: 30,
+          body: 'How well your offering answers what the other company is looking for, and the other way round: goals, industry, size, region and offering description.',
+        },
+        {
+          label: 'Market',
+          weight: 25,
+          body: 'Whether you work in nearby markets: industries served, type of customers, regions and model (product or service, businesses or consumers).',
+        },
+        {
+          label: 'Values',
+          weight: 25,
+          body: 'Whether you work in a similar way: company values, sustainability, mission and vision, certifications and awards.',
+        },
+        {
+          label: 'Organisation',
+          weight: 20,
+          body: 'Whether you are compatible in size and structure: headcount, revenue band and departments.',
+        },
+      ],
+      note: 'Missing data never counts against you: that item is simply left out of the calculation. Your industry comes from the category you choose, not from the ATECO code.',
+    },
+    members: {
+      title: 'Up to 50 people per company',
+      body: 'Each company can have up to 50 members. Whoever registers the company becomes its owner. One person can belong to several companies and switch between them.',
+      roles: [
+        { name: 'Owner', body: 'Created the company and can transfer ownership' },
+        { name: 'Admin', body: 'Approves join requests and invites colleagues by email' },
+        { name: 'Member', body: 'Acts on behalf of the company in Explore, Matches and Calendar' },
+      ],
+    },
+    paths: {
+      title: 'Company or collaborator?',
+      intro: 'There are two ways in. It depends on whether your company is already on MINERVA.',
+      labels: { who: 'Who does it', needs: 'What you need', after: 'What you can do next' },
+      company: {
+        title: 'Register the company',
+        who: 'The owner, or someone who can represent the company, when it is not on MINERVA yet. Whoever creates it becomes its owner.',
+        needs: ['A personal account', 'The Visura camerale as a PDF', 'Annual revenue and the company details listed above'],
+        after: [
+          'Complete the profile and get your first matches',
+          'Approve join requests and invite colleagues',
+          'Appoint admins and, if needed, transfer ownership',
+        ],
+      },
+      collaborator: {
+        title: 'Join as a collaborator',
+        who: 'Anyone who works at a company that is already on MINERVA.',
+        needs: [
+          'A personal account: email and password, or Google',
+          'First and last name',
+          'The name of your company to search for, or the invitation you received by email',
+        ],
+        after: [
+          'An owner or admin approves your request. With an invitation you are in straight away',
+          'Explore compatible companies, connect and book meetings on behalf of the company',
+          'Keep the company profile up to date with your colleagues',
+        ],
+      },
+      videoTitle: 'Video: registering a company or joining as a collaborator',
+    },
+    cta: {
+      title: 'Ready to start?',
+      body: 'Create your account. Right after, you can join your company or register a new one.',
+      primary: 'Create your account',
+      secondary: 'Already have an account? Sign in',
+    },
   },
 
   legal: {
