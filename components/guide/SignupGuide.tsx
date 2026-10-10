@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { ArrowRightIcon, CheckIcon } from '@/components/ui/icons';
 import { GuideVideo } from '@/components/guide/GuideVideo';
-import { APP_LINKS, SIGNUP_VIDEO_URL } from '@/lib/guide';
+import { APP_LINKS, SIGNUP_VIDEO } from '@/lib/guide';
 import { getDictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/config';
 import type { SignupPathCard } from '@/lib/i18n/types';
@@ -158,7 +158,7 @@ export function SignupGuide({ locale }: { locale: Locale }) {
                   <PathCard card={t.paths.company} labels={t.paths.labels} />
                   <PathCard card={t.paths.collaborator} labels={t.paths.labels} />
                 </div>
-                <GuideVideo videoUrl={SIGNUP_VIDEO_URL} title={t.paths.videoTitle} />
+                <GuideVideo videoUrl={SIGNUP_VIDEO[locale]?.url} poster={SIGNUP_VIDEO[locale]?.poster} title={t.paths.videoTitle} />
               </Section>
 
               {/* Closing CTA */}

@@ -3,7 +3,7 @@
  * URL; renders nothing without one. Embeds load lazily (iframe `loading`,
  * `preload="none"` for files) so the guide stays light until someone plays it.
  */
-export function GuideVideo({ videoUrl, title }: { videoUrl?: string; title: string }) {
+export function GuideVideo({ videoUrl, poster, title }: { videoUrl?: string; poster?: string; title: string }) {
   if (!videoUrl) return null;
   const embed = toEmbedUrl(videoUrl);
 
@@ -22,6 +22,7 @@ export function GuideVideo({ videoUrl, title }: { videoUrl?: string; title: stri
         ) : (
           <video
             src={videoUrl}
+            poster={poster}
             title={title}
             controls
             playsInline
