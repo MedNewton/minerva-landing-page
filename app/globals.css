@@ -31,6 +31,9 @@
   --border-strong: #CBD5E1;
   --muted: #E8ECF1;
   --success: #15803D;
+  /* Company logo tiles stay white in both themes so colour logos keep their contrast */
+  --logo-tile: #FFFFFF;
+  --logo-tile-border: #E2E8F0;
 }
 .dark {
   --bg: #0E1117;
@@ -54,6 +57,8 @@
   --border-strong: #2E3847;
   --muted: #1A2230;
   --success: #22C55E;
+  --logo-tile: #FFFFFF;
+  --logo-tile-border: transparent;
 }
 
 html { scroll-behavior: smooth; background: var(--bg); }

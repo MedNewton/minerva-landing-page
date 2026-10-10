@@ -30,6 +30,8 @@ const config: Config = {
         'border-strong': 'var(--border-strong)',
         muted: 'var(--muted)',
         success: 'var(--success)',
+        'logo-tile': 'var(--logo-tile)',
+        'logo-tile-border': 'var(--logo-tile-border)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
