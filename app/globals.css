@@ -357,14 +357,12 @@ tbody tr:hover { background-color: var(--surface-alt); }
   width: 100%;
   pointer-events: none;
 }
+/* Wide tile so horizontal wordmarks stay legible; tile look comes from <CompanyLogo/> */
 .cs-thumb {
   flex: none;
-  width: 52px;
-  height: 52px;
+  width: 96px;
+  height: 56px;
   border-radius: 9px;
-  object-fit: cover;
-  background: #D4D4D4;       /* fallback before SVG loads */
-  display: block;
 }
 .cs-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .cs-title {
@@ -374,7 +372,7 @@ tbody tr:hover { background-color: var(--surface-alt); }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 220px;
+  max-width: 175px;
 }
 .cs-subtitle {
   font-size: 12px;

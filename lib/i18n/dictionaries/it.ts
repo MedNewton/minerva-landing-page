@@ -46,8 +46,8 @@ export const it: Dictionary = {
         score: 87,
         verifiedOn: '21 mag 2026',
         companies: [
-          { logo: '/assets/icons/lavazza.svg', name: 'Lavazza', meta: 'Caffè e bevande · Torino' },
-          { logo: '/assets/icons/sacmi.svg', name: 'SACMI', meta: 'Macchine per il packaging · Imola' },
+          { logo: 'mpm', name: 'MPM', meta: 'Servizi ambientali · Sicurezza stradale' },
+          { logo: 'cosmopolitan', name: 'Cosmopolitan Business Hotel', meta: 'Ospitalità · Business hotel' },
         ],
         dimensions: [
           { label: 'Cultura operativa', value: 82 },
@@ -123,11 +123,8 @@ export const it: Dictionary = {
     progressLabel: 'Avanzamento della sezione',
     stepLabel: 'Passaggio {n} di {total}',
     stackCompanies: [
-      { title: 'Barilla', subtitle: 'Produzione alimentare · Parma', logo: '/assets/icons/barilla.svg' },
-      { title: 'Brembo', subtitle: 'Componenti automotive · Bergamo', logo: '/assets/icons/brembo.svg' },
-      { title: 'Reply', subtitle: 'Consulenza tecnologica · Torino', logo: '/assets/icons/reply.svg' },
-      { title: "De'Longhi", subtitle: 'Elettrodomestici · Treviso', logo: '/assets/icons/delonghi.svg' },
-      { title: 'IMA Group', subtitle: 'Packaging · Bologna', logo: '/assets/icons/ima.svg' },
+      { title: 'MPM', subtitle: 'Servizi ambientali · Sicurezza stradale', logo: 'mpm' },
+      { title: 'Cosmopolitan', subtitle: 'Ospitalità · Business hotel', logo: 'cosmopolitan' },
     ],
     counterLabel: 'Candidate al matching',
     verificationCards: [

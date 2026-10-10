@@ -46,8 +46,8 @@ export const en: Dictionary = {
         score: 87,
         verifiedOn: '21 May 2026',
         companies: [
-          { logo: '/assets/icons/lavazza.svg', name: 'Lavazza', meta: 'Coffee & Beverage · Torino' },
-          { logo: '/assets/icons/sacmi.svg', name: 'SACMI', meta: 'Packaging Equipment · Imola' },
+          { logo: 'mpm', name: 'MPM', meta: 'Environmental services · Road safety' },
+          { logo: 'cosmopolitan', name: 'Cosmopolitan Business Hotel', meta: 'Hospitality · Business hotel' },
         ],
         dimensions: [
           { label: 'Operating culture', value: 82 },
@@ -123,11 +123,8 @@ export const en: Dictionary = {
     progressLabel: 'Section progress',
     stepLabel: 'Step {n} of {total}',
     stackCompanies: [
-      { title: 'Barilla', subtitle: 'Food Production · Parma', logo: '/assets/icons/barilla.svg' },
-      { title: 'Brembo', subtitle: 'Automotive Components · Bergamo', logo: '/assets/icons/brembo.svg' },
-      { title: 'Reply', subtitle: 'Technology Consulting · Torino', logo: '/assets/icons/reply.svg' },
-      { title: "De'Longhi", subtitle: 'Consumer Appliances · Treviso', logo: '/assets/icons/delonghi.svg' },
-      { title: 'IMA Group', subtitle: 'Packaging · Bologna', logo: '/assets/icons/ima.svg' },
+      { title: 'MPM', subtitle: 'Environmental services · Road safety', logo: 'mpm' },
+      { title: 'Cosmopolitan', subtitle: 'Hospitality · Business hotel', logo: 'cosmopolitan' },
     ],
     counterLabel: 'Candidate for matching',
     verificationCards: [

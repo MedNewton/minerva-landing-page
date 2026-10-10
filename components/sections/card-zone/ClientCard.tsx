@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import { CompanyLogo } from '@/components/ui/CompanyLogo';
 import { SlotNumber } from '@/components/ui/SlotNumber';
 import { CheckCircleIcon } from '@/components/ui/icons';
 import { useI18n } from '@/lib/i18n/client';
@@ -33,7 +34,7 @@ export function ClientCard() {
       <div className="space-y-3 sm:mb-6">
         {match.companies.map((c) => (
           <div key={c.name} className="flex items-center gap-3">
-            <img src={c.logo} alt="" className="h-10 w-10 sm:h-9 sm:w-9 rounded shrink-0" />
+            <CompanyLogo id={c.logo} decorative className="h-12 w-[96px]" sizes="96px" />
             <div className="min-w-0">
               <div className="text-base sm:text-sm font-semibold truncate">{c.name}</div>
               <div className="text-[13px] sm:text-xs text-fg-subtle">{c.meta}</div>

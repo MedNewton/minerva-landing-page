@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { CompanyLogo } from '@/components/ui/CompanyLogo';
 import { useI18n } from '@/lib/i18n/client';
 import { prefersReducedMotion } from '@/lib/media';
 
@@ -20,7 +21,7 @@ const LEAVE_MS = 200;
  */
 export function CompanyCardStack({ onAdvance }: { onAdvance: () => void }) {
   const { dict } = useI18n();
-  const companies = dict.scrollFeatures.stackCompanies;
+  const companies = fillStack(dict.scrollFeatures.stackCompanies);
   const mountRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const onAdvanceRef = useRef(onAdvance);
@@ -102,14 +103,14 @@ export function CompanyCardStack({ onAdvance }: { onAdvance: () => void }) {
       <div className="cs-stack" ref={mountRef}>
         {companies.map((item, i) => (
           <div
-            key={item.title}
+            key={i}
             className="cs-card"
             ref={(el) => {
               cardRefs.current[i] = el;
             }}
           >
             <div className="cs-card-inner">
-              <img className="cs-thumb" src={item.logo} alt="" loading="eager" />
+              <CompanyLogo id={item.logo} decorative className="cs-thumb" sizes="96px" />
               <div className="cs-info">
                 <div className="cs-title">{item.title}</div>
                 <div className="cs-subtitle">{item.subtitle}</div>
@@ -120,4 +121,16 @@ export function CompanyCardStack({ onAdvance }: { onAdvance: () => void }) {
       </div>
     </div>
   );
+}
+
+/**
+ * The stack needs VISIBLE + 1 cards to keep its depth (the card that just left
+ * waits hidden at the back), so short lists repeat until full. Adding companies
+ * to the dictionaries replaces the repeats.
+ */
+function fillStack<T>(items: T[]): T[] {
+  if (items.length === 0) return items;
+  const filled = [...items];
+  while (filled.length < VISIBLE + 1) filled.push(items[filled.length % items.length]);
+  return filled;
 }

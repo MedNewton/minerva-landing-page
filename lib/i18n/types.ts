@@ -1,4 +1,5 @@
 import type { RegionSlug } from '@/lib/data/italy-map-paths';
+import type { LogoId } from '@/lib/logos';
 
 export interface NavLink {
   label: string;
@@ -21,7 +22,7 @@ export interface PartnerTile {
 export interface StackCompany {
   title: string;
   subtitle: string;
-  logo: string;
+  logo: LogoId;
 }
 
 /** Sample match shown in the "Client match" scorecard. */
@@ -29,7 +30,7 @@ export interface ClientMatch {
   ticket: string;
   score: number;
   verifiedOn: string;
-  companies: { logo: string; name: string; meta: string }[];
+  companies: { logo: LogoId; name: string; meta: string }[];
   dimensions: { label: string; value: number }[];
 }
 
