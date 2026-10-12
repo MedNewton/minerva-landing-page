@@ -414,7 +414,6 @@ export const it: Dictionary = {
       { capability: 'Identità aziendale verificata', minerva: 'Camera di Commercio', traditional: 'Autodichiarata o verificata manualmente' },
       { capability: 'Segnale di affinità culturale', minerva: '47 dimensioni', traditional: null },
       { capability: 'Tempo al primo match qualificato', minerva: '~72 h', traditional: 'Settimane o mesi', mono: true },
-      { capability: 'Trasparenza dei costi', minerva: '€0 – €39 / mese', traditional: 'Variabili e imprevedibili', mono: true },
       { capability: 'Rapporto segnale/rumore', minerva: 'Lista ordinata di match qualificati', traditional: 'Basata su ricerca e contatti a freddo' },
       { capability: 'Approccio GDPR', minerva: 'Dati residenti in UE by design', traditional: 'Dipende dal fornitore' },
     ],
