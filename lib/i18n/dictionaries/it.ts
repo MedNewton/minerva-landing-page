@@ -500,9 +500,10 @@ export const it: Dictionary = {
           'Esplorazione illimitata dei profili',
           'Raccomandazioni di match avanzate',
           'Analisi dettagliata della compatibilità',
+          'Messaggistica diretta',
         ],
         notes: [
-          'Nota: i contatti diretti non sono inclusi.',
+          "Nota: e-mail e telefono dell'azienda non sono inclusi.",
           'Nota: per le prime sottoscrizioni fino a dicembre 2027',
         ],
       },
@@ -515,7 +516,6 @@ export const it: Dictionary = {
         cta: { label: 'Scegli', href: '#cta', variant: 'solid' },
         featuresTitle: 'Tutto il piano Smart, più:',
         features: [
-          'Messaggistica diretta',
           'Pianificazione di incontri e calendario condiviso',
           "Accesso all'email",
           'Accesso al numero di telefono (quando disponibile)',
