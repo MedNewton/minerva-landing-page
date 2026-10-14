@@ -500,9 +500,10 @@ export const en: Dictionary = {
           'Unlimited profile exploration',
           'Advanced match recommendations',
           'Detailed compatibility breakdown',
+          'Direct messaging',
         ],
         notes: [
-          'Note: Direct contact information is not included.',
+          "Note: the company's e-mail and phone are not included.",
           'Note: for the first subscriptions until December 2027',
         ],
       },
@@ -515,7 +516,6 @@ export const en: Dictionary = {
         cta: { label: 'Select', href: '#cta', variant: 'solid' },
         featuresTitle: 'Everything in Smart, plus:',
         features: [
-          'Direct messaging',
           'Meeting scheduling and shared calendar',
           'Email access',
           'Phone number access (when available)',
