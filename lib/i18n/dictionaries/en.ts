@@ -126,6 +126,7 @@ export const en: Dictionary = {
     stackCompanies: [
       { title: 'MPM', subtitle: 'Environmental services · Road safety', logo: 'mpm' },
       { title: 'Cosmopolitan', subtitle: 'Hospitality · Business hotel', logo: 'cosmopolitan' },
+      { title: 'Delta Motors', subtitle: 'Automotive · Mercedes-Benz', logo: 'deltaMotors' },
     ],
     counterLabel: 'Candidate for matching',
     verificationCards: [

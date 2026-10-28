@@ -24,6 +24,13 @@ export const LOGOS = {
     width: 268,
     height: 136,
   },
+  deltaMotors: {
+    name: 'Delta Motors',
+    // Vector, page 2 (black, horizontal) of the sponsor's Illustrator PDF, cropped to the artwork.
+    src: '/logos/delta-motors-logo.svg',
+    width: 646,
+    height: 175,
+  },
 } as const satisfies Record<string, CompanyLogoAsset>;
 
 export interface CompanyLogoAsset {
