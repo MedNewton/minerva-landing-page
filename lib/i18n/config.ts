@@ -3,7 +3,9 @@ export const LOCALES = ['en', 'it'] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = 'en';
+// Italian when the request states no language (link-preview crawlers send
+// none), so a shared link previews in Italian.
+export const DEFAULT_LOCALE: Locale = 'it';
 
 /** Cookie the proxy reads (and the header switcher writes) to remember the visitor's choice. */
 export const LOCALE_COOKIE = 'NEXT_LOCALE';
