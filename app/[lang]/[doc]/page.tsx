@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { LegalPage } from '@/components/legal/LegalPage';
 import { getDictionary } from '@/lib/i18n';
 import { hasLocale } from '@/lib/i18n/config';
+import { pageMetadata } from '@/lib/seo';
 import { LEGAL_SLUGS, hasLegalSlug } from '@/lib/legal';
 
 export function generateStaticParams() {
@@ -17,13 +18,12 @@ export async function generateMetadata({
   const { lang, doc } = await params;
   if (!hasLocale(lang) || !hasLegalSlug(doc)) notFound();
   const entry = getDictionary(lang).legal.docs[doc];
-  return {
+  return pageMetadata({
+    locale: lang,
+    path: `/${doc}`,
     title: entry.title,
     description: entry.description,
-    alternates: {
-      languages: { en: `/en/${doc}`, it: `/it/${doc}` },
-    },
-  };
+  });
 }
 
 export default async function LegalDocumentPage({ params }: PageProps<'/[lang]/[doc]'>) {

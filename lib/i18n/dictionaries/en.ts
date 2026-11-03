@@ -2,9 +2,9 @@ import type { Dictionary } from '../types';
 
 export const en: Dictionary = {
   meta: {
-    title: 'Minerva — Find Italian partners who share how you operate',
+    title: 'MINERVA · Smart matches between Italian SMEs',
     description:
-      'B2B matchmaking for Italian PMI on 47 dimensions of operating culture. Verified through Camera di Commercio. GDPR by design.',
+      'The B2B platform that connects Italian SMEs with like-minded clients, suppliers and partners. Companies verified through the Chamber of Commerce. Free to join.',
   },
 
   header: {
