@@ -4,18 +4,18 @@ import { SignupGuide } from '@/components/guide/SignupGuide';
 import { GUIDE_SLUG } from '@/lib/guide';
 import { getDictionary } from '@/lib/i18n';
 import { hasLocale } from '@/lib/i18n/config';
+import { pageMetadata } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const { meta } = getDictionary(lang).howTo;
-  return {
+  return pageMetadata({
+    locale: lang,
+    path: `/${GUIDE_SLUG}`,
     title: meta.title,
     description: meta.description,
-    alternates: {
-      languages: { en: `/en/${GUIDE_SLUG}`, it: `/it/${GUIDE_SLUG}` },
-    },
-  };
+  });
 }
 
 export default async function SignupGuidePage({ params }: PageProps<'/[lang]/come-iscriversi'>) {

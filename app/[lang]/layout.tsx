@@ -5,6 +5,7 @@ import { ThemeRestore } from '@/components/theme/ThemeRestore';
 import { getDictionary } from '@/lib/i18n';
 import { LocaleProvider } from '@/lib/i18n/client';
 import { hasLocale, LOCALES } from '@/lib/i18n/config';
+import { pageMetadata } from '@/lib/seo';
 import '../globals.css';
 
 const sans = Google_Sans_Flex({
@@ -32,13 +33,12 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  return {
+  return pageMetadata({
+    locale: lang,
+    path: '',
     title: dict.meta.title,
     description: dict.meta.description,
-    alternates: {
-      languages: { en: '/en', it: '/it' },
-    },
-  };
+  });
 }
 
 export const viewport: Viewport = {

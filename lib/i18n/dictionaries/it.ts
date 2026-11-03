@@ -2,9 +2,9 @@ import type { Dictionary } from '../types';
 
 export const it: Dictionary = {
   meta: {
-    title: 'Minerva — Trova partner italiani che condividono il tuo modo di lavorare',
+    title: 'MINERVA · Match intelligenti tra PMI italiane',
     description:
-      'Matchmaking B2B per le PMI italiane su 47 dimensioni di cultura operativa. Verifica tramite Camera di Commercio. GDPR by design.',
+      'La piattaforma B2B che mette in contatto le PMI italiane con clienti, fornitori e partner affini. Aziende verificate tramite Camera di Commercio. Iscrizione gratuita.',
   },
 
   header: {
