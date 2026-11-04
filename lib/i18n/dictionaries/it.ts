@@ -49,6 +49,7 @@ export const it: Dictionary = {
         companies: [
           { logo: 'mpm', name: 'MPM', meta: 'Servizi ambientali · Sicurezza stradale' },
           { logo: 'cosmopolitan', name: 'Cosmopolitan Business Hotel', meta: 'Ospitalità · Business hotel' },
+          { logo: 'deltaMotors', name: 'Delta Motors', meta: 'Automotive · Mercedes-Benz' },
         ],
         dimensions: [
           { label: 'Cultura operativa', value: 82 },
